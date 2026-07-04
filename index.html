@@ -1,218 +1,1105 @@
-		<!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VVY3N3JDCJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-VVY3N3JDCJ');
+	</script>
 
-		<!-- Google tag (gtag.js) -->
- 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-VVY3N3JDCJ"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Rehan Faisal — Indie Game Developer</title>
+	<meta name="description" content="Rehan Faisal — indie game developer, 3D artist and CTO of Aurasoft. Unity games, Blender low-poly art, RDP/VPS solutions and social media marketing." />
+	<link rel="icon" href="/images/Logo.png" type="image/png" />
 
-		  gtag('config', 'G-VVY3N3JDCJ');
-		</script>
-		
-		<link rel="icon" href="/images/Logo.png" type="image/png">
-		<title>Rehan Faisal</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+	<style>
+		:root {
+			--bg: #070b14;
+			--bg-soft: #0c1322;
+			--card: rgba(18, 28, 48, .6);
+			--card-border: rgba(94, 234, 212, .12);
+			--text: #e6edf7;
+			--muted: #94a3b8;
+			--accent: #2dd4bf;
+			--accent-2: #38bdf8;
+			--accent-3: #a78bfa;
+			--glow: rgba(45, 212, 191, .35);
+			--radius: 18px;
+		}
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="index.html">Rehan</a></h1>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
 
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="https://Aurasoft.co">Aurasoft</a></li>
-								<li><a href="https://twitter.com/RehanFaisall">Twitter/x</a></li>
-								<li><a href="https://rehandev.itch.io/">Itch.io</a></li>
-								<!--<li><a href="generic.html">Generic</a></li>
-								<li><a href="elements.html">Elements</a></li>-->
-								
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
+		body {
+			background: var(--bg);
+			color: var(--text);
+			font-family: 'Space Grotesk', system-ui, sans-serif;
+			line-height: 1.65;
+			overflow-x: hidden;
+		}
 
-				<!-- Banner -->
-					<section id="banner">
-						<div class="inner">
-							<a href="#" class="image"><img src="images/Ship1.gif" alt="" /></a></span>
-							<h2>Hey, my name is Rehan Faisal</h2>
-							<p>Hi, I’m Rehan. I create 3D models, games, custom RDP solutions, and also work in social media marketing,
-								 managing multiple Instagram accounts with tens of millions of views. I'm the CTO of <a href="http://aurasoft.co">aurasoft.co</a>, developing games
-								in Unity ever since my O-Levels. Currently, i'm working on some exciting projects (solo + with my team)! Follow me on X to stay updated when they drop!
-								I’m passionate about Blockchain technology/crypto, ethical hacking, and learning useful skills that
-								help me build, create, and grow in the digital world.</p>
-							<p>I previously completed a 3-month internship at <a href="https://www.ingeniousc.com/">Ingenious Concepts</a>, gaining hands-on experience in game development,
-								software solutions, and team leadership.</p>
-						</div>
-					</section>
+		::selection { background: var(--accent); color: #06251f; }
 
-				<!-- Wrapper -->
-					<section id="wrapper">
+		canvas#stars {
+			position: fixed;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			pointer-events: none;
+		}
 
-						<!-- One -->
-							<section id="one" class="wrapper spotlight style1">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/Pic01.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Indie game development in unity</h2>
-										<p>Hi, I’m Rehan. I’ve been making games in Unity for 6+ years, from indie projects to company games.
-											 I do everything ui/ux, design, code, 3D models, and marketing. I also use Unity Asset Store to speed up
-											  development when needed.
-											
-										</p>
-										<!-- <a href="#" class="special">Learn more</a> -->
-									</div>
-								</div>
-							</section>
+		.mono { font-family: 'JetBrains Mono', monospace; }
 
-						<!-- Two -->
-							<section id="two" class="wrapper alt spotlight style2">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">3D modelling in blender</h2>
-										<p>I’ve been creating 3D models professionally for over 3 years, mainly using Blender. 
-											I focus on low-poly models, and my work reflects my artistic side. I’ve been passionate about
-											 sketching and growing creatively since childhood.</p>
-										<!-- <a href="#" class="special">Learn more</a> -->
-									</div>
-								</div>
-							</section>
+		a { color: var(--accent); text-decoration: none; }
+		a:hover { color: var(--accent-2); }
 
-						<!-- Three -->
-							<section id="three" class="wrapper spotlight style3">
-								<div class="inner">
-									<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-									<div class="content">
-										<h2 class="major">RDP/VPS</h2>
-										<p>I also offer affordable and fast UK based RDP/VPS solutions, perfect for personal and business use.
-											 Whether you need a private server for work, gaming, or hosting, I can set up custom RDPs/VPS 
-											 that fit your needs.</p>
-										<!-- <a href="#" class="special">Learn more</a> -->
-									</div>
-								</div>
-							</section>
+		img { max-width: 100%; display: block; }
 
-						<!-- Four -->
-							<section id="four" class="wrapper alt style1">
-								<div class="inner">
-									<h2 class="major">My projects</h2>
-									<p>These are some of my projects</p>
-									<section class="features">
-										<article>
-											<a href="#" class="image"><img src="images/AurasoftBanner1.png" alt="" /></a>
-											<h3 class="major">My company games</h3>
-											<p>These are some of the games that i worked on.. not my personal projects</p>
-											<a href="https://aurasoft.co/index.php/portfolio/portfolio-masonry/1-portfolio-masonry/" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="https://twitter.com/RehanFaisall" class="image"><img src="images/Xbanner.png" alt="" /></a>
-											<h3 class="major">My Twitter/x</h3>
-											<p>I sometimes upload devlogs on my twitter/x account</p>
-											<a href="https://twitter.com/RehanFaisall" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="https://rehandev.itch.io/" class="image"><img src="images/banner.png" alt="" /></a>
-											<h3 class="major">personal projects</h3>
-											<p>These are some of my personal projects that i have uploaded on itch.io</p>
-											<a href="https://rehandev.itch.io/" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="https://aurasoft.co/index.php/aura-rdp-vps/" class="image"><img src="images/RdpBanner.png" alt="" /></a>
-											<h3 class="major">Custom RDP/VPS Solutions</h3>
-											<p>These are the the rdp/vps. you can either buy them by emailing me or emailing to the email on that website.</p>
-											<a href="https://aurasoft.co/index.php/aura-rdp-vps/" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="https://rehandev.itch.io/dashblast-demo-version" class="image"><img src="images/DashBlast.png" alt="" /></a>
-											<h3 class="major">DASH//BLAST</h3>
-											<p>This is a pre-demo version of DASH//BLAST. An indie game that i am working on.</p>
-											<a href="https://rehandev.itch.io/dashblast-demo-version" class="special">Learn more</a>
-										</article>
-									</section>
-									<ul class="actions">
-										<li><a href="#" class="button">Browse All</a></li>
-									</ul>
-								</div>
-							</section>
+		/* ---------- Nav ---------- */
+		nav#topnav {
+			position: fixed;
+			top: 0; left: 0; right: 0;
+			z-index: 50;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 14px 5vw;
+			backdrop-filter: blur(14px);
+			-webkit-backdrop-filter: blur(14px);
+			background: rgba(7, 11, 20, .55);
+			border-bottom: 1px solid transparent;
+			transition: border-color .3s, background .3s;
+		}
+		nav#topnav.scrolled {
+			border-bottom-color: var(--card-border);
+			background: rgba(7, 11, 20, .85);
+		}
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-weight: 700;
+			font-size: 1.1rem;
+			color: var(--text);
+			letter-spacing: .5px;
+		}
+		.brand img { width: 34px; height: 34px; object-fit: contain; filter: drop-shadow(0 0 6px var(--glow)); }
+		.brand .dot { color: var(--accent); }
 
-					</section>
+		.nav-links {
+			display: flex;
+			gap: 6px;
+			align-items: center;
+		}
+		.nav-links a {
+			color: var(--muted);
+			font-size: .92rem;
+			font-weight: 500;
+			padding: 8px 14px;
+			border-radius: 999px;
+			transition: color .2s, background .2s;
+		}
+		.nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+		.nav-links a.active { color: var(--accent); background: rgba(45, 212, 191, .1); }
+		.nav-links a.cta {
+			color: #06251f;
+			background: var(--accent);
+			font-weight: 600;
+			margin-left: 8px;
+			box-shadow: 0 0 18px var(--glow);
+		}
+		.nav-links a.cta:hover { background: var(--accent-2); color: #061f2b; }
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<p>Contact me for business related queries/collaboration or for RDPs </p>
-							<form target="_blank"  action="https://formsubmit.co/rehanfaisal123@gmail.com" method="POST">
-							    <div class="fields">
-							        <div class="field">
-							            <label for="name">Name</label>
-							            <input type="text" name="name" id="name" required />
-							        </div>
-							        <div class="field">
-							            <label for="email">Email</label>
-								            <input type="email" name="email" id="email" required />
- 							       </div>
- 							       <div class="field">
- 							           <label for="message">Message</label>
-  								          <textarea name="message" id="message" rows="4" required></textarea>
-  								      </div>
- 								   </div>
-							    <ul class="actions">
-							        <li><input type="submit" value="Send Message" /></li>
-							    </ul>
-							</form>
-							<ul class="contact">
-<!--							<li class="icon solid fa-home">
-									Untitled Inc<br />
-									1234 Somewhere Road Suite #2894<br />
-									Nashville, TN 00000-0000
-								</li>-->	
-								<li class="icon solid fa-phone">0326 3872197 -- Whatsapp only</li>
-								<li class="icon solid fa-envelope">rehanfaisal@gmail.com</a></li>
-								<li class="icon brands fa-twitter"><a href="https://twitter.com/RehanFaisall">https://twitter.com/RehanFaisall</a></li>
-								<li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/rehan-faisal-288973248">https://www.linkedin.com/in/rehan-faisal-288973248/</a></li>
-<!--- 							<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>  >
-								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li> --> 
-							</ul>
-							<ul class="copyright">
-								<li>&copy; 2025 Rehan Faisal. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
+		#hamburger {
+			display: none;
+			background: none;
+			border: 1px solid var(--card-border);
+			border-radius: 10px;
+			color: var(--text);
+			font-size: 1.3rem;
+			width: 42px; height: 42px;
+			cursor: pointer;
+		}
 
+		@media (max-width: 820px) {
+			#hamburger { display: block; }
+			.nav-links {
+				position: fixed;
+				top: 70px; right: 5vw; left: 5vw;
+				flex-direction: column;
+				align-items: stretch;
+				background: rgba(10, 16, 30, .97);
+				border: 1px solid var(--card-border);
+				border-radius: var(--radius);
+				padding: 14px;
+				gap: 4px;
+				transform: translateY(-12px);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity .25s, transform .25s;
+			}
+			.nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
+			.nav-links a { text-align: center; }
+			.nav-links a.cta { margin-left: 0; margin-top: 6px; }
+		}
+
+		/* ---------- Layout ---------- */
+		main { position: relative; z-index: 1; }
+		section { padding: 110px 5vw 40px; max-width: 1150px; margin: 0 auto; }
+
+		.kicker {
+			font-family: 'JetBrains Mono', monospace;
+			color: var(--accent);
+			font-size: .85rem;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			display: block;
+			margin-bottom: 10px;
+		}
+		h2.section-title {
+			font-size: clamp(1.8rem, 4vw, 2.6rem);
+			font-weight: 700;
+			margin-bottom: 18px;
+			line-height: 1.2;
+		}
+		.section-sub { color: var(--muted); max-width: 640px; margin-bottom: 42px; }
+
+		/* ---------- Hero ---------- */
+		#hero {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			padding-top: 90px;
+			max-width: 1150px;
+		}
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1.15fr .85fr;
+			gap: 40px;
+			align-items: center;
+			width: 100%;
+		}
+		.hero-tag {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .8rem;
+			color: var(--accent);
+			border: 1px solid var(--card-border);
+			background: rgba(45, 212, 191, .06);
+			padding: 7px 14px;
+			border-radius: 999px;
+			margin-bottom: 22px;
+		}
+		.hero-tag .pulse {
+			width: 8px; height: 8px;
+			border-radius: 50%;
+			background: var(--accent);
+			animation: pulse 1.8s infinite;
+		}
+		@keyframes pulse {
+			0% { box-shadow: 0 0 0 0 var(--glow); }
+			70% { box-shadow: 0 0 0 9px rgba(45, 212, 191, 0); }
+			100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+		}
+		h1.hero-name {
+			font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+			font-weight: 700;
+			line-height: 1.08;
+			margin-bottom: 14px;
+		}
+		h1 .grad {
+			background: linear-gradient(92deg, var(--accent), var(--accent-2) 55%, var(--accent-3));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+		.typeline {
+			font-family: 'JetBrains Mono', monospace;
+			font-size: clamp(1rem, 2.2vw, 1.3rem);
+			color: var(--muted);
+			min-height: 1.8em;
+			margin-bottom: 22px;
+		}
+		.typeline .caret {
+			display: inline-block;
+			width: 10px;
+			background: var(--accent);
+			margin-left: 3px;
+			animation: blink 1s steps(1) infinite;
+		}
+		@keyframes blink { 50% { opacity: 0; } }
+		.hero-desc { color: var(--muted); max-width: 540px; margin-bottom: 32px; }
+		.hero-desc strong { color: var(--text); font-weight: 600; }
+
+		.btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 13px 26px;
+			border-radius: 12px;
+			font-weight: 600;
+			font-size: .95rem;
+			transition: transform .18s, box-shadow .18s, background .18s;
+			cursor: pointer;
+			border: none;
+			font-family: inherit;
+		}
+		.btn:active { transform: scale(.97); }
+		.btn.primary {
+			background: linear-gradient(92deg, var(--accent), var(--accent-2));
+			color: #06251f;
+			box-shadow: 0 4px 24px var(--glow);
+		}
+		.btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--glow); color: #06251f; }
+		.btn.ghost {
+			background: transparent;
+			color: var(--text);
+			border: 1px solid rgba(148, 163, 184, .35);
+		}
+		.btn.ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+		.hero-ship {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.ship-ring {
+			position: absolute;
+			width: min(380px, 80%);
+			aspect-ratio: 1;
+			border-radius: 50%;
+			border: 1px dashed rgba(45, 212, 191, .25);
+			animation: spin 40s linear infinite;
+		}
+		.ship-ring::before, .ship-ring::after {
+			content: '';
+			position: absolute;
+			width: 10px; height: 10px;
+			border-radius: 50%;
+			background: var(--accent-2);
+			box-shadow: 0 0 12px var(--accent-2);
+		}
+		.ship-ring::before { top: -5px; left: 50%; }
+		.ship-ring::after { bottom: -5px; left: 50%; background: var(--accent-3); box-shadow: 0 0 12px var(--accent-3); }
+		@keyframes spin { to { transform: rotate(360deg); } }
+		.hero-ship img {
+			width: min(300px, 70%);
+			animation: bob 4.5s ease-in-out infinite;
+			filter: drop-shadow(0 20px 40px rgba(45, 212, 191, .25));
+			cursor: pointer;
+			transition: transform .3s;
+			user-select: none;
+			-webkit-user-drag: none;
+		}
+		.hero-ship img:hover { transform: scale(1.06) rotate(-3deg); }
+		.hero-ship img.boost { animation: boost .6s ease; }
+		@keyframes bob {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-18px); }
+		}
+		@keyframes boost {
+			0% { transform: translateY(0) scale(1); }
+			40% { transform: translateY(-60px) scale(1.1) rotate(6deg); }
+			100% { transform: translateY(0) scale(1); }
+		}
+		.ship-hint {
+			position: absolute;
+			bottom: -8px;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .72rem;
+			color: rgba(148, 163, 184, .55);
+			letter-spacing: 1px;
+		}
+
+		.scroll-cue {
+			position: absolute;
+			left: 50%;
+			bottom: 26px;
+			transform: translateX(-50%);
+			color: var(--muted);
+			font-size: 1.4rem;
+			animation: bob 2s ease-in-out infinite;
+			opacity: .7;
+		}
+
+		@media (max-width: 880px) {
+			.hero-grid { grid-template-columns: 1fr; text-align: center; }
+			.hero-desc { margin-inline: auto; }
+			.btn-row { justify-content: center; }
+			.hero-ship { order: -1; min-height: 240px; }
+			.hero-ship img { width: 200px; }
+			.ship-ring { width: 260px; }
+		}
+
+		/* ---------- Stats ---------- */
+		.stats {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 16px;
+			margin-top: 30px;
+		}
+		.stat {
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: var(--radius);
+			padding: 26px 18px;
+			text-align: center;
+			transition: transform .25s, border-color .25s;
+		}
+		.stat:hover { transform: translateY(-5px); border-color: var(--accent); }
+		.stat .num {
+			font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+			font-weight: 700;
+			color: var(--accent);
+			font-family: 'JetBrains Mono', monospace;
+		}
+		.stat .lbl { color: var(--muted); font-size: .88rem; margin-top: 4px; }
+		@media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+		/* ---------- Skill cards ---------- */
+		.cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+			gap: 20px;
+		}
+		.card {
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: var(--radius);
+			padding: 30px 26px;
+			position: relative;
+			overflow: hidden;
+			transform-style: preserve-3d;
+			transition: border-color .25s, box-shadow .25s;
+			will-change: transform;
+		}
+		.card::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(45, 212, 191, .1), transparent 45%);
+			opacity: 0;
+			transition: opacity .3s;
+			pointer-events: none;
+		}
+		.card:hover::before { opacity: 1; }
+		.card:hover { border-color: rgba(45, 212, 191, .45); box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+		.card .icon {
+			width: 52px; height: 52px;
+			border-radius: 14px;
+			display: grid;
+			place-items: center;
+			margin-bottom: 18px;
+			background: rgba(45, 212, 191, .1);
+			border: 1px solid var(--card-border);
+		}
+		.card .icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+		.card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+		.card p { color: var(--muted); font-size: .93rem; }
+		.card .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 7px; }
+		.tag {
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .7rem;
+			color: var(--accent-2);
+			background: rgba(56, 189, 248, .08);
+			border: 1px solid rgba(56, 189, 248, .2);
+			padding: 3px 9px;
+			border-radius: 999px;
+		}
+
+		/* ---------- Projects ---------- */
+		.projects {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 22px;
+		}
+		.project {
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: var(--radius);
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			transition: transform .3s, border-color .3s, box-shadow .3s;
+			color: var(--text);
+		}
+		.project:hover {
+			transform: translateY(-7px);
+			border-color: rgba(45, 212, 191, .5);
+			box-shadow: 0 20px 50px rgba(0,0,0,.5);
+			color: var(--text);
+		}
+		.project .thumb {
+			height: 185px;
+			overflow: hidden;
+			position: relative;
+		}
+		.project .thumb img {
+			width: 100%; height: 100%;
+			object-fit: cover;
+			transition: transform .5s ease;
+		}
+		.project:hover .thumb img { transform: scale(1.08); }
+		.project .thumb::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, transparent 55%, rgba(7, 11, 20, .85));
+		}
+		.project .badge {
+			position: absolute;
+			top: 12px; left: 12px;
+			z-index: 2;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .68rem;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			color: #06251f;
+			background: var(--accent);
+			padding: 4px 10px;
+			border-radius: 999px;
+			font-weight: 600;
+		}
+		.project .body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+		.project h3 { font-size: 1.15rem; margin-bottom: 8px; }
+		.project p { color: var(--muted); font-size: .92rem; flex: 1; }
+		.project .link {
+			margin-top: 16px;
+			font-weight: 600;
+			font-size: .9rem;
+			color: var(--accent);
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.project:hover .link { gap: 11px; color: var(--accent-2); }
+		.project .link { transition: gap .25s, color .25s; }
+
+		/* ---------- Timeline ---------- */
+		.timeline { position: relative; padding-left: 30px; max-width: 720px; }
+		.timeline::before {
+			content: '';
+			position: absolute;
+			left: 7px; top: 6px; bottom: 6px;
+			width: 2px;
+			background: linear-gradient(var(--accent), var(--accent-3));
+			opacity: .45;
+		}
+		.tl-item { position: relative; padding: 0 0 38px 26px; }
+		.tl-item:last-child { padding-bottom: 0; }
+		.tl-item::before {
+			content: '';
+			position: absolute;
+			left: -30px; top: 6px;
+			width: 16px; height: 16px;
+			border-radius: 50%;
+			background: var(--bg);
+			border: 3px solid var(--accent);
+			box-shadow: 0 0 14px var(--glow);
+			margin-left: 30px;
+		}
+		.tl-item .when {
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .78rem;
+			color: var(--accent-2);
+			letter-spacing: 1px;
+		}
+		.tl-item h3 { font-size: 1.12rem; margin: 4px 0 6px; }
+		.tl-item p { color: var(--muted); font-size: .93rem; }
+
+		/* ---------- Contact ---------- */
+		.contact-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 36px;
+			align-items: start;
+		}
+		@media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
+
+		form .field { margin-bottom: 16px; }
+		form label {
+			display: block;
+			font-size: .85rem;
+			color: var(--muted);
+			margin-bottom: 6px;
+			font-family: 'JetBrains Mono', monospace;
+		}
+		form input, form textarea {
+			width: 100%;
+			background: rgba(10, 16, 30, .8);
+			border: 1px solid rgba(148, 163, 184, .25);
+			border-radius: 12px;
+			color: var(--text);
+			padding: 13px 16px;
+			font-family: inherit;
+			font-size: .95rem;
+			transition: border-color .2s, box-shadow .2s;
+			resize: vertical;
+		}
+		form input:focus, form textarea:focus {
+			outline: none;
+			border-color: var(--accent);
+			box-shadow: 0 0 0 3px rgba(45, 212, 191, .15);
+		}
+
+		.contact-card {
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: var(--radius);
+			padding: 30px;
+		}
+		.contact-card ul { list-style: none; }
+		.contact-card li {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			padding: 12px 0;
+			border-bottom: 1px solid rgba(148, 163, 184, .1);
+			color: var(--muted);
+			font-size: .93rem;
+			word-break: break-word;
+		}
+		.contact-card li:last-child { border-bottom: none; }
+		.contact-card .ci {
+			flex: none;
+			width: 40px; height: 40px;
+			border-radius: 11px;
+			display: grid;
+			place-items: center;
+			background: rgba(45, 212, 191, .1);
+			border: 1px solid var(--card-border);
+		}
+		.contact-card .ci svg { width: 19px; height: 19px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+
+		/* ---------- Footer ---------- */
+		footer {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			padding: 46px 5vw 34px;
+			color: var(--muted);
+			font-size: .85rem;
+			border-top: 1px solid rgba(148, 163, 184, .1);
+			margin-top: 70px;
+		}
+		footer .socials { display: flex; justify-content: center; gap: 14px; margin-bottom: 18px; }
+		footer .socials a {
+			width: 42px; height: 42px;
+			border-radius: 50%;
+			display: grid;
+			place-items: center;
+			border: 1px solid rgba(148, 163, 184, .25);
+			color: var(--muted);
+			transition: border-color .2s, color .2s, transform .2s;
+		}
+		footer .socials a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+		footer .socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+		/* ---------- Reveal animations ---------- */
+		.reveal {
+			opacity: 0;
+			transform: translateY(34px);
+			transition: opacity .7s ease, transform .7s ease;
+		}
+		.reveal.visible { opacity: 1; transform: none; }
+		.reveal.d1 { transition-delay: .08s; }
+		.reveal.d2 { transition-delay: .16s; }
+		.reveal.d3 { transition-delay: .24s; }
+		.reveal.d4 { transition-delay: .32s; }
+
+		/* ---------- Back to top ---------- */
+		#toTop {
+			position: fixed;
+			right: 22px; bottom: 22px;
+			z-index: 40;
+			width: 46px; height: 46px;
+			border-radius: 50%;
+			border: 1px solid var(--card-border);
+			background: rgba(12, 19, 34, .9);
+			color: var(--accent);
+			font-size: 1.15rem;
+			cursor: pointer;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity .3s, transform .3s;
+			transform: translateY(10px);
+		}
+		#toTop.show { opacity: 1; pointer-events: auto; transform: none; }
+		#toTop:hover { background: var(--accent); color: #06251f; }
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+			html { scroll-behavior: auto; }
+		}
+	</style>
+</head>
+<body>
+
+	<canvas id="stars"></canvas>
+
+	<!-- ===== Nav ===== -->
+	<nav id="topnav">
+		<a class="brand" href="#hero">
+			<img src="images/Logo.png" alt="Rehan Faisal logo" />
+			REHAN<span class="dot">.DEV</span>
+		</a>
+		<button id="hamburger" aria-label="Toggle menu">☰</button>
+		<div class="nav-links" id="navLinks">
+			<a href="#hero" class="active">Home</a>
+			<a href="#about">About</a>
+			<a href="#skills">Skills</a>
+			<a href="#projects">Projects</a>
+			<a href="#journey">Journey</a>
+			<a href="#contact" class="cta">Get in touch</a>
+		</div>
+	</nav>
+
+	<main>
+		<!-- ===== Hero ===== -->
+		<section id="hero">
+			<div class="hero-grid">
+				<div>
+					<span class="hero-tag reveal"><span class="pulse"></span> Available for collabs &amp; projects</span>
+					<h1 class="hero-name reveal d1">Hey, I'm <span class="grad">Rehan Faisal</span></h1>
+					<div class="typeline reveal d2"><span id="typed"></span><span class="caret">&nbsp;</span></div>
+					<p class="hero-desc reveal d3">
+						Indie game dev and CTO of <a href="https://aurasoft.co" target="_blank" rel="noopener"><strong>Aurasoft</strong></a>.
+						I've been building games in <strong>Unity</strong> since my O-Levels — doing the code, the UI/UX,
+						the 3D models and the marketing. Currently cooking some exciting projects, solo and with my team.
+					</p>
+					<div class="btn-row reveal d4">
+						<a class="btn primary" href="#projects">View my work ↓</a>
+						<a class="btn ghost" href="#contact">Contact me</a>
+					</div>
+				</div>
+				<div class="hero-ship reveal d2">
+					<div class="ship-ring"></div>
+					<img id="ship" src="images/Ship1.gif" alt="Low-poly spaceship from DASH//BLAST" title="Click me!" />
+					<span class="ship-hint">// click the ship</span>
+				</div>
 			</div>
+			<div class="scroll-cue">▾</div>
+		</section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<!-- ===== About + Stats ===== -->
+		<section id="about">
+			<span class="kicker reveal">01 — About</span>
+			<h2 class="section-title reveal d1">A builder in the <span class="grad" style="background:linear-gradient(92deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">digital world</span></h2>
+			<p class="section-sub reveal d2">
+				I create 3D models, games and custom RDP solutions, and I work in social media marketing —
+				managing multiple Instagram accounts with tens of millions of views. I previously completed a
+				3-month internship at <a href="https://www.ingeniousc.com/" target="_blank" rel="noopener">Ingenious Concepts</a>,
+				gaining hands-on experience in game development, software solutions and team leadership.
+				I'm passionate about blockchain, ethical hacking, and learning skills that help me build, create and grow.
+			</p>
+			<div class="stats">
+				<div class="stat reveal"><div class="num"><span data-count="6">0</span>+</div><div class="lbl">Years in Unity</div></div>
+				<div class="stat reveal d1"><div class="num"><span data-count="3">0</span>+</div><div class="lbl">Years in Blender</div></div>
+				<div class="stat reveal d2"><div class="num"><span data-count="10">0</span>M+</div><div class="lbl">Views managed</div></div>
+				<div class="stat reveal d3"><div class="num"><span data-count="4">0</span></div><div class="lbl">Fields I work in</div></div>
+			</div>
+		</section>
 
-	</body>
+		<!-- ===== Skills ===== -->
+		<section id="skills">
+			<span class="kicker reveal">02 — What I do</span>
+			<h2 class="section-title reveal d1">Skills &amp; services</h2>
+			<p class="section-sub reveal d2">From prototype to published — I like owning the whole pipeline.</p>
+			<div class="cards">
+				<div class="card tilt reveal">
+					<div class="icon"><svg viewBox="0 0 24 24"><path d="M6 11h4m-2-2v4M15 10h.01M18 13h.01M17.3 5H6.7a4 4 0 0 0-3.9 3.2l-1 5A3.3 3.3 0 0 0 7.5 16l1-1.5h7l1 1.5a3.3 3.3 0 0 0 5.7-2.8l-1-5A4 4 0 0 0 17.3 5Z"/></svg></div>
+					<h3>Game Development</h3>
+					<p>6+ years making games in Unity — from indie projects to company games. Code, design, UI/UX and marketing, end to end.</p>
+					<div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">UI/UX</span><span class="tag">Asset Store</span></div>
+				</div>
+				<div class="card tilt reveal d1">
+					<div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 0v10m9-5-9 5m-9-5 9 5"/></svg></div>
+					<h3>3D Modelling</h3>
+					<p>3+ years of professional low-poly modelling in Blender. Sketching since childhood — the artistic side shows in my work.</p>
+					<div class="tags"><span class="tag">Blender</span><span class="tag">Low-poly</span><span class="tag">Game-ready</span></div>
+				</div>
+				<div class="card tilt reveal d2">
+					<div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+					<h3>RDP / VPS Solutions</h3>
+					<p>Affordable, fast UK-based RDP/VPS for personal and business use — custom setups for work, gaming or hosting.</p>
+					<div class="tags"><span class="tag">London</span><span class="tag">99.9% uptime</span><span class="tag">Custom specs</span></div>
+				</div>
+				<div class="card tilt reveal d3">
+					<div class="icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8m0 0h-5m5 0v5"/></svg></div>
+					<h3>Social Media Marketing</h3>
+					<p>Managing multiple Instagram accounts with tens of millions of views. Growth, content strategy and analytics.</p>
+					<div class="tags"><span class="tag">Instagram</span><span class="tag">Growth</span><span class="tag">Content</span></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== Projects ===== -->
+		<section id="projects">
+			<span class="kicker reveal">03 — Work</span>
+			<h2 class="section-title reveal d1">Projects &amp; things I've shipped</h2>
+			<p class="section-sub reveal d2">A mix of personal games, company work and services.</p>
+			<div class="projects">
+				<a class="project reveal" href="https://rehandev.itch.io/dashblast-demo-version" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">Featured</span><img src="images/DashBlast.png" alt="DASH//BLAST gameplay screenshot" loading="lazy" /></div>
+					<div class="body">
+						<h3>DASH//BLAST</h3>
+						<p>My indie game — a fast top-down mech shooter built in Unity. Pre-demo version out now, playable on itch.io.</p>
+						<span class="link">Play the demo →</span>
+					</div>
+				</a>
+				<a class="project reveal d1" href="https://rehandev.itch.io/" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">itch.io</span><img src="images/banner.png" alt="Rehan's itch.io banner" loading="lazy" /></div>
+					<div class="body">
+						<h3>Personal Projects</h3>
+						<p>My solo experiments and games, all uploaded on itch.io — prototypes, jams and passion projects.</p>
+						<span class="link">Browse itch.io →</span>
+					</div>
+				</a>
+				<a class="project reveal d2" href="https://aurasoft.co/index.php/portfolio/portfolio-masonry/1-portfolio-masonry/" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">Aurasoft</span><img src="images/AurasoftBanner1.png" alt="Aurasoft website banner" loading="lazy" /></div>
+					<div class="body">
+						<h3>Company Games</h3>
+						<p>Games I've worked on as CTO at Aurasoft — a software company doing game, web and app development.</p>
+						<span class="link">See the portfolio →</span>
+					</div>
+				</a>
+				<a class="project reveal d3" href="https://aurasoft.co/index.php/aura-rdp-vps/" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">Service</span><img src="images/RdpBanner.png" alt="Aura RDP/VPS pricing plans" loading="lazy" /></div>
+					<div class="body">
+						<h3>Aura RDP / VPS</h3>
+						<p>Custom London-based RDP and VPS plans from $4.99/mo. Order through the site or just email me directly.</p>
+						<span class="link">View plans →</span>
+					</div>
+				</a>
+				<a class="project reveal d4" href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">Devlogs</span><img src="images/Xbanner.png" alt="RehanDev on X" loading="lazy" /></div>
+					<div class="body">
+						<h3>Devlogs on X</h3>
+						<p>I post devlogs and progress on my games over on X — follow to know the moment new projects drop.</p>
+						<span class="link">Follow @RehanFaisall →</span>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<!-- ===== Journey ===== -->
+		<section id="journey">
+			<span class="kicker reveal">04 — Journey</span>
+			<h2 class="section-title reveal d1">How I got here</h2>
+			<div class="timeline" style="margin-top: 36px;">
+				<div class="tl-item reveal">
+					<span class="when">O-LEVELS</span>
+					<h3>Started making games in Unity</h3>
+					<p>Fell into game development during my O-Levels and never stopped — learning code, design and 3D on my own.</p>
+				</div>
+				<div class="tl-item reveal d1">
+					<span class="when">INTERNSHIP</span>
+					<h3>Ingenious Concepts</h3>
+					<p>3-month internship with hands-on experience in game development, software solutions and team leadership.</p>
+				</div>
+				<div class="tl-item reveal d2">
+					<span class="when">NOW</span>
+					<h3>CTO @ Aurasoft</h3>
+					<p>Leading tech at Aurasoft while building my own games — including DASH//BLAST — and running RDP/VPS services on the side.</p>
+				</div>
+				<div class="tl-item reveal d3">
+					<span class="when">NEXT</span>
+					<h3>Exciting projects incoming…</h3>
+					<p>Working on new things solo and with the team. Follow me on <a href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">X</a> to catch them when they drop.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== Contact ===== -->
+		<section id="contact">
+			<span class="kicker reveal">05 — Contact</span>
+			<h2 class="section-title reveal d1">Let's build something</h2>
+			<p class="section-sub reveal d2">Business queries, collaborations, or RDP/VPS orders — my inbox is open.</p>
+			<div class="contact-grid">
+				<form class="reveal" target="_blank" action="https://formsubmit.co/rehanfaisal123@gmail.com" method="POST">
+					<div class="field">
+						<label for="name">// your name</label>
+						<input type="text" name="name" id="name" placeholder="Jane Doe" required />
+					</div>
+					<div class="field">
+						<label for="email">// your email</label>
+						<input type="email" name="email" id="email" placeholder="jane@example.com" required />
+					</div>
+					<div class="field">
+						<label for="message">// message</label>
+						<textarea name="message" id="message" rows="5" placeholder="Tell me about your project…" required></textarea>
+					</div>
+					<button type="submit" class="btn primary">Send message ✦</button>
+				</form>
+				<div class="contact-card reveal d2">
+					<ul>
+						<li>
+							<span class="ci"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+							<span>0326 3872197 — WhatsApp only</span>
+						</li>
+						<li>
+							<span class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg></span>
+							<span>rehanfaisal@gmail.com</span>
+						</li>
+						<li>
+							<span class="ci"><svg viewBox="0 0 24 24"><path d="m4 4 7.2 9.4L4.3 20h2.4l5.5-5.3L16.8 20H20l-7.5-9.8L18.9 4h-2.4l-4.9 4.8L8 4H4Z"/></svg></span>
+							<a href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">@RehanFaisall on X</a>
+						</li>
+						<li>
+							<span class="ci"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v2a5 5 0 0 1 2-2ZM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></span>
+							<a href="https://www.linkedin.com/in/rehan-faisal-288973248" target="_blank" rel="noopener">LinkedIn</a>
+						</li>
+						<li>
+							<span class="ci"><svg viewBox="0 0 24 24"><path d="M4 7 2 9v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9l-2-2M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M4 7h16M9 13h6"/></svg></span>
+							<a href="https://rehandev.itch.io/" target="_blank" rel="noopener">rehandev.itch.io</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- ===== Footer ===== -->
+	<footer>
+		<div class="socials">
+			<a href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="m4 4 7.2 9.4L4.3 20h2.4l5.5-5.3L16.8 20H20l-7.5-9.8L18.9 4h-2.4l-4.9 4.8L8 4H4Z"/></svg></a>
+			<a href="https://www.linkedin.com/in/rehan-faisal-288973248" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z"/></svg></a>
+			<a href="https://rehandev.itch.io/" target="_blank" rel="noopener" aria-label="itch.io"><svg viewBox="0 0 24 24"><path d="M3.13 1.34C2.08 1.96.03 4.33 0 4.95v1.03c0 1.3 1.22 2.44 2.33 2.44 1.33 0 2.44-1.1 2.44-2.41 0 1.3 1.07 2.41 2.4 2.41 1.34 0 2.38-1.1 2.38-2.41 0 1.3 1.14 2.41 2.48 2.41h.02c1.34 0 2.49-1.1 2.49-2.41 0 1.3 1.04 2.41 2.38 2.41 1.33 0 2.4-1.1 2.4-2.41 0 1.3 1.11 2.41 2.44 2.41C22.78 8.42 24 7.28 24 5.98V4.95c-.03-.62-2.08-2.99-3.13-3.61-3.28-.11-5.55-.13-8.87-.13-3.32 0-7.85.05-8.87.13Zm6.15 7.1a2.7 2.7 0 0 1-.46.48c-.65.5-1.45.78-2.05.78-.61 0-1.4-.28-2.04-.78a2.6 2.6 0 0 1-.28-.26v9.29c0 1.11.06 2.08.66 2.72.71.77 2.31.78 4.11.83 1.81.06 3.83.09 4.78.09.95 0 2.97-.03 4.78-.09 1.8-.05 3.4-.06 4.11-.83.6-.64.66-1.61.66-2.72V8.66a2.6 2.6 0 0 1-.28.26c-.65.5-1.43.78-2.04.78-.6 0-1.4-.28-2.05-.78a2.75 2.75 0 0 1-.46-.48 2.9 2.9 0 0 1-.47.48c-.64.5-1.44.78-2.04.78h-.09c-.6 0-1.4-.28-2.04-.78a2.9 2.9 0 0 1-.47-.48 2.75 2.75 0 0 1-.46.48c-.65.5-1.44.78-2.05.78h-.08c-.6 0-1.4-.28-2.04-.78a2.7 2.7 0 0 1-.47-.48Zm-1.9 3.87c.98 0 1.85 0 2.93 1.18.85-.09 1.74-.13 2.69-.13.94 0 1.83.04 2.68.13 1.08-1.18 1.95-1.18 2.93-1.18 1.06 0 2.34 1.16 2.34 4.65 0 2.24-1.42 3.14-3.55 3.14-1.35 0-2.55-.47-3.19-1.29a19 19 0 0 1-1.21.04c-.42 0-.83-.01-1.22-.04-.63.82-1.83 1.29-3.18 1.29-2.13 0-3.55-.9-3.55-3.14 0-3.49 1.28-4.65 2.34-4.65Z"/></svg></a>
+			<a href="https://aurasoft.co" target="_blank" rel="noopener" aria-label="Aurasoft"><svg viewBox="0 0 24 24"><path d="M12 2 2 19h20L12 2Zm0 5.3L17.7 17H6.3L12 7.3Z"/></svg></a>
+		</div>
+		<p>&copy; 2026 Rehan Faisal — designed &amp; built with too much coffee ☕</p>
+	</footer>
+
+	<button id="toTop" aria-label="Back to top">↑</button>
+
+	<script>
+	(function () {
+		'use strict';
+		var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		/* ---------- Starfield ---------- */
+		var canvas = document.getElementById('stars');
+		var ctx = canvas.getContext('2d');
+		var stars = [], shooting = [], W, H;
+		var mouse = { x: .5, y: .5 };
+
+		function resize() {
+			W = canvas.width = window.innerWidth;
+			H = canvas.height = window.innerHeight;
+			stars = [];
+			var n = Math.min(220, Math.floor(W * H / 9000));
+			for (var i = 0; i < n; i++) {
+				stars.push({
+					x: Math.random() * W,
+					y: Math.random() * H,
+					z: Math.random() * .8 + .2,      // depth for parallax
+					r: Math.random() * 1.4 + .3,
+					tw: Math.random() * Math.PI * 2,
+					sp: Math.random() * .06 + .01
+				});
+			}
+		}
+
+		function spawnShooter() {
+			if (document.hidden || reduceMotion) return;
+			shooting.push({
+				x: Math.random() * W * .8,
+				y: Math.random() * H * .35,
+				vx: 7 + Math.random() * 5,
+				vy: 3 + Math.random() * 2,
+				life: 1
+			});
+		}
+
+		function draw() {
+			ctx.clearRect(0, 0, W, H);
+			var ox = (mouse.x - .5) * 30, oy = (mouse.y - .5) * 30;
+			for (var i = 0; i < stars.length; i++) {
+				var s = stars[i];
+				s.tw += s.sp;
+				var a = .35 + Math.abs(Math.sin(s.tw)) * .65;
+				ctx.beginPath();
+				ctx.arc(s.x - ox * s.z, s.y - oy * s.z, s.r, 0, Math.PI * 2);
+				ctx.fillStyle = 'rgba(180, 225, 255,' + (a * s.z).toFixed(3) + ')';
+				ctx.fill();
+			}
+			for (var j = shooting.length - 1; j >= 0; j--) {
+				var m = shooting[j];
+				m.x += m.vx; m.y += m.vy; m.life -= .018;
+				if (m.life <= 0 || m.x > W || m.y > H) { shooting.splice(j, 1); continue; }
+				var grad = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 9, m.y - m.vy * 9);
+				grad.addColorStop(0, 'rgba(94, 234, 212,' + m.life.toFixed(2) + ')');
+				grad.addColorStop(1, 'rgba(94, 234, 212, 0)');
+				ctx.strokeStyle = grad;
+				ctx.lineWidth = 1.6;
+				ctx.beginPath();
+				ctx.moveTo(m.x, m.y);
+				ctx.lineTo(m.x - m.vx * 9, m.y - m.vy * 9);
+				ctx.stroke();
+			}
+			requestAnimationFrame(draw);
+		}
+
+		window.addEventListener('resize', resize);
+		document.addEventListener('mousemove', function (e) {
+			mouse.x = e.clientX / W;
+			mouse.y = e.clientY / H;
+		});
+		resize();
+		if (!reduceMotion) {
+			draw();
+			setInterval(spawnShooter, 3800);
+		} else {
+			// static stars for reduced motion
+			(function once() {
+				ctx.clearRect(0, 0, W, H);
+				for (var i = 0; i < stars.length; i++) {
+					var s = stars[i];
+					ctx.beginPath();
+					ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+					ctx.fillStyle = 'rgba(180, 225, 255,' + (.6 * s.z).toFixed(3) + ')';
+					ctx.fill();
+				}
+			})();
+		}
+
+		/* ---------- Typewriter ---------- */
+		var roles = [
+			'Indie Game Developer',
+			'Unity Developer — 6+ years',
+			'3D Artist (Blender)',
+			'CTO @ Aurasoft',
+			'RDP / VPS Provider',
+			'Social Media Marketer'
+		];
+		var typedEl = document.getElementById('typed');
+		var ri = 0, ci = 0, deleting = false;
+		function type() {
+			var word = roles[ri];
+			if (reduceMotion) { typedEl.textContent = word; return; }
+			typedEl.textContent = word.slice(0, ci);
+			if (!deleting) {
+				ci++;
+				if (ci > word.length) { deleting = true; setTimeout(type, 1700); return; }
+				setTimeout(type, 55);
+			} else {
+				ci--;
+				if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+				setTimeout(type, 28);
+			}
+		}
+		type();
+
+		/* ---------- Scroll: nav state, reveal, counters, scroll-spy ---------- */
+		var nav = document.getElementById('topnav');
+		var toTop = document.getElementById('toTop');
+		window.addEventListener('scroll', function () {
+			var y = window.scrollY;
+			nav.classList.toggle('scrolled', y > 30);
+			toTop.classList.toggle('show', y > 600);
+		}, { passive: true });
+		toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+		var revealObs = new IntersectionObserver(function (entries) {
+			entries.forEach(function (en) {
+				if (en.isIntersecting) {
+					en.target.classList.add('visible');
+					revealObs.unobserve(en.target);
+				}
+			});
+		}, { threshold: .12 });
+		document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+
+		function animateCount(el) {
+			var target = +el.getAttribute('data-count');
+			var t0 = null, dur = 1400;
+			function step(ts) {
+				if (!t0) t0 = ts;
+				var p = Math.min((ts - t0) / dur, 1);
+				el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+				if (p < 1) requestAnimationFrame(step);
+			}
+			requestAnimationFrame(step);
+		}
+		var countObs = new IntersectionObserver(function (entries) {
+			entries.forEach(function (en) {
+				if (en.isIntersecting) {
+					animateCount(en.target);
+					countObs.unobserve(en.target);
+				}
+			});
+		}, { threshold: .6 });
+		document.querySelectorAll('[data-count]').forEach(function (el) { countObs.observe(el); });
+
+		var sections = document.querySelectorAll('main section[id]');
+		var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+		var spyObs = new IntersectionObserver(function (entries) {
+			entries.forEach(function (en) {
+				if (en.isIntersecting) {
+					navAnchors.forEach(function (a) {
+						a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id);
+					});
+				}
+			});
+		}, { rootMargin: '-42% 0px -52% 0px' });
+		sections.forEach(function (s) { spyObs.observe(s); });
+
+		/* ---------- Mobile menu ---------- */
+		var burger = document.getElementById('hamburger');
+		var links = document.getElementById('navLinks');
+		burger.addEventListener('click', function () { links.classList.toggle('open'); });
+		links.querySelectorAll('a').forEach(function (a) {
+			a.addEventListener('click', function () { links.classList.remove('open'); });
+		});
+
+		/* ---------- Card tilt + glow ---------- */
+		var fine = window.matchMedia('(pointer: fine)').matches;
+		if (fine && !reduceMotion) {
+			document.querySelectorAll('.card').forEach(function (card) {
+				card.addEventListener('mousemove', function (e) {
+					var r = card.getBoundingClientRect();
+					var px = (e.clientX - r.left) / r.width;
+					var py = (e.clientY - r.top) / r.height;
+					card.style.setProperty('--mx', (px * 100) + '%');
+					card.style.setProperty('--my', (py * 100) + '%');
+					card.style.transform =
+						'perspective(700px) rotateY(' + ((px - .5) * 8).toFixed(2) + 'deg)' +
+						' rotateX(' + ((.5 - py) * 8).toFixed(2) + 'deg)';
+				});
+				card.addEventListener('mouseleave', function () {
+					card.style.transform = '';
+				});
+			});
+		}
+
+		/* ---------- Ship easter egg ---------- */
+		var ship = document.getElementById('ship');
+		var clicks = 0;
+		ship.addEventListener('click', function () {
+			ship.classList.remove('boost');
+			void ship.offsetWidth; // restart animation
+			ship.classList.add('boost');
+			clicks++;
+			if (clicks === 5) {
+				var hint = document.querySelector('.ship-hint');
+				if (hint) hint.textContent = '// ok pilot, go play DASH//BLAST instead 🚀';
+			}
+			for (var i = 0; i < 6; i++) spawnShooter();
+		});
+	})();
+	</script>
+</body>
 </html>
