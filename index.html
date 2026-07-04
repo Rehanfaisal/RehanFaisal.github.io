@@ -13,12 +13,12 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Rehan Faisal — Indie Game Developer</title>
-	<meta name="description" content="Rehan Faisal — indie game developer, 3D artist and CTO of Aurasoft. Unity games, Blender low-poly art, RDP/VPS solutions and social media marketing." />
+	<meta name="description" content="Rehan Faisal — indie game developer, 3D artist, asset pack creator and CTO of Aurasoft. Unity games, pixel asset packs, dev tools, RDP/VPS and more." />
 	<link rel="icon" href="/images/Logo.png" type="image/png" />
 
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
 
 	<style>
 		:root {
@@ -31,8 +31,10 @@
 			--accent: #2dd4bf;
 			--accent-2: #38bdf8;
 			--accent-3: #a78bfa;
+			--danger: #fb7185;
 			--glow: rgba(45, 212, 191, .35);
 			--radius: 18px;
+			--pixel: 'Press Start 2P', monospace;
 		}
 
 		* { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,7 +74,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 14px 5vw;
+			padding: 14px 4vw;
 			backdrop-filter: blur(14px);
 			-webkit-backdrop-filter: blur(14px);
 			background: rgba(7, 11, 20, .55);
@@ -88,23 +90,19 @@
 			align-items: center;
 			gap: 10px;
 			font-weight: 700;
-			font-size: 1.1rem;
+			font-size: 1.05rem;
 			color: var(--text);
 			letter-spacing: .5px;
 		}
-		.brand img { width: 34px; height: 34px; object-fit: contain; filter: drop-shadow(0 0 6px var(--glow)); }
+		.brand img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 6px var(--glow)); }
 		.brand .dot { color: var(--accent); }
 
-		.nav-links {
-			display: flex;
-			gap: 6px;
-			align-items: center;
-		}
+		.nav-links { display: flex; gap: 4px; align-items: center; }
 		.nav-links a {
 			color: var(--muted);
-			font-size: .92rem;
+			font-size: .9rem;
 			font-weight: 500;
-			padding: 8px 14px;
+			padding: 8px 13px;
 			border-radius: 999px;
 			transition: color .2s, background .2s;
 		}
@@ -130,11 +128,11 @@
 			cursor: pointer;
 		}
 
-		@media (max-width: 820px) {
+		@media (max-width: 900px) {
 			#hamburger { display: block; }
 			.nav-links {
 				position: fixed;
-				top: 70px; right: 5vw; left: 5vw;
+				top: 70px; right: 4vw; left: 4vw;
 				flex-direction: column;
 				align-items: stretch;
 				background: rgba(10, 16, 30, .97);
@@ -157,30 +155,83 @@
 		section { padding: 110px 5vw 40px; max-width: 1150px; margin: 0 auto; }
 
 		.kicker {
-			font-family: 'JetBrains Mono', monospace;
+			font-family: var(--pixel);
 			color: var(--accent);
-			font-size: .85rem;
-			letter-spacing: 2px;
-			text-transform: uppercase;
+			font-size: .62rem;
+			letter-spacing: 1px;
 			display: block;
-			margin-bottom: 10px;
+			margin-bottom: 14px;
 		}
+		.kicker::before { content: '▸ '; color: var(--accent-3); }
 		h2.section-title {
 			font-size: clamp(1.8rem, 4vw, 2.6rem);
 			font-weight: 700;
 			margin-bottom: 18px;
 			line-height: 1.2;
+			position: relative;
+			display: inline-block;
 		}
-		.section-sub { color: var(--muted); max-width: 640px; margin-bottom: 42px; }
+		/* glitch on hover */
+		h2.section-title:hover { animation: glitch-skew .4s steps(2) both; }
+		h2.section-title::before, h2.section-title::after {
+			content: attr(data-text);
+			position: absolute;
+			left: 0; top: 0;
+			width: 100%;
+			opacity: 0;
+			pointer-events: none;
+		}
+		h2.section-title:hover::before {
+			opacity: .8;
+			color: var(--accent);
+			clip-path: inset(0 0 55% 0);
+			animation: glitch-a .35s steps(2) both;
+		}
+		h2.section-title:hover::after {
+			opacity: .8;
+			color: var(--danger);
+			clip-path: inset(55% 0 0 0);
+			animation: glitch-b .35s steps(2) both;
+		}
+		@keyframes glitch-a { 0%{transform:translate(-4px,-2px)} 50%{transform:translate(3px,1px)} 100%{transform:none} }
+		@keyframes glitch-b { 0%{transform:translate(4px,2px)} 50%{transform:translate(-3px,-1px)} 100%{transform:none} }
+		@keyframes glitch-skew { 0%{transform:skewX(-1deg)} 50%{transform:skewX(1deg)} 100%{transform:none} }
 
-		/* ---------- Hero ---------- */
+		.section-sub { color: var(--muted); max-width: 660px; margin-bottom: 42px; }
+		.grad {
+			background: linear-gradient(92deg, var(--accent), var(--accent-2) 55%, var(--accent-3));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		/* ---------- Hero + game ---------- */
 		#hero {
 			min-height: 100vh;
 			display: flex;
 			align-items: center;
 			padding-top: 90px;
 			max-width: 1150px;
+			position: relative;
+			cursor: crosshair;
 		}
+		#hero a, #hero button { cursor: pointer; }
+		.hud {
+			position: absolute;
+			top: 96px; right: 5vw;
+			font-family: var(--pixel);
+			font-size: .6rem;
+			color: var(--accent);
+			text-align: right;
+			line-height: 2.1;
+			text-shadow: 0 0 8px var(--glow);
+			user-select: none;
+			pointer-events: none;
+			z-index: 3;
+		}
+		.hud .hi { color: var(--accent-3); }
+		.hud .combo { color: var(--danger); display: none; }
+
 		.hero-grid {
 			display: grid;
 			grid-template-columns: 1.15fr .85fr;
@@ -191,13 +242,13 @@
 		.hero-tag {
 			display: inline-flex;
 			align-items: center;
-			gap: 8px;
-			font-family: 'JetBrains Mono', monospace;
-			font-size: .8rem;
+			gap: 10px;
+			font-family: var(--pixel);
+			font-size: .58rem;
 			color: var(--accent);
 			border: 1px solid var(--card-border);
 			background: rgba(45, 212, 191, .06);
-			padding: 7px 14px;
+			padding: 9px 15px;
 			border-radius: 999px;
 			margin-bottom: 22px;
 		}
@@ -217,12 +268,6 @@
 			font-weight: 700;
 			line-height: 1.08;
 			margin-bottom: 14px;
-		}
-		h1 .grad {
-			background: linear-gradient(92deg, var(--accent), var(--accent-2) 55%, var(--accent-3));
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
 		}
 		.typeline {
 			font-family: 'JetBrains Mono', monospace;
@@ -295,33 +340,40 @@
 		.ship-ring::before { top: -5px; left: 50%; }
 		.ship-ring::after { bottom: -5px; left: 50%; background: var(--accent-3); box-shadow: 0 0 12px var(--accent-3); }
 		@keyframes spin { to { transform: rotate(360deg); } }
-		.hero-ship img {
-			width: min(300px, 70%);
+		.ship-wrap {
 			animation: bob 4.5s ease-in-out infinite;
+			position: relative;
+			z-index: 2;
+		}
+		.ship-wrap.boost { animation: boost .5s ease; }
+		.ship-wrap img {
+			width: min(280px, 62vw);
+			max-width: 280px;
 			filter: drop-shadow(0 20px 40px rgba(45, 212, 191, .25));
-			cursor: pointer;
-			transition: transform .3s;
 			user-select: none;
 			-webkit-user-drag: none;
+			transition: filter .2s;
+			will-change: transform;
 		}
-		.hero-ship img:hover { transform: scale(1.06) rotate(-3deg); }
-		.hero-ship img.boost { animation: boost .6s ease; }
+		.ship-wrap.firing img { filter: drop-shadow(0 0 26px rgba(45, 212, 191, .8)); }
 		@keyframes bob {
 			0%, 100% { transform: translateY(0); }
-			50% { transform: translateY(-18px); }
+			50% { transform: translateY(-16px); }
 		}
 		@keyframes boost {
 			0% { transform: translateY(0) scale(1); }
-			40% { transform: translateY(-60px) scale(1.1) rotate(6deg); }
+			40% { transform: translateY(-30px) scale(1.07); }
 			100% { transform: translateY(0) scale(1); }
 		}
 		.ship-hint {
 			position: absolute;
-			bottom: -8px;
-			font-family: 'JetBrains Mono', monospace;
-			font-size: .72rem;
-			color: rgba(148, 163, 184, .55);
+			bottom: -14px;
+			font-family: var(--pixel);
+			font-size: .52rem;
+			color: rgba(148, 163, 184, .6);
 			letter-spacing: 1px;
+			text-align: center;
+			width: 100%;
 		}
 
 		.scroll-cue {
@@ -339,10 +391,40 @@
 			.hero-grid { grid-template-columns: 1fr; text-align: center; }
 			.hero-desc { margin-inline: auto; }
 			.btn-row { justify-content: center; }
-			.hero-ship { order: -1; min-height: 240px; }
-			.hero-ship img { width: 200px; }
-			.ship-ring { width: 260px; }
+			.hero-ship { order: -1; min-height: 220px; }
+			.ship-wrap img { width: 180px; }
+			.ship-ring { width: 240px; }
+			.hud { top: 84px; right: 4vw; }
 		}
+
+		/* ---------- Achievements ---------- */
+		#achv {
+			position: fixed;
+			left: 18px; bottom: 18px;
+			z-index: 60;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			pointer-events: none;
+		}
+		.achv-toast {
+			font-family: var(--pixel);
+			font-size: .55rem;
+			line-height: 1.9;
+			color: var(--text);
+			background: rgba(10, 16, 30, .95);
+			border: 1px solid var(--accent);
+			border-left: 4px solid var(--accent);
+			border-radius: 8px;
+			padding: 12px 16px;
+			max-width: 300px;
+			box-shadow: 0 8px 30px rgba(0,0,0,.6), 0 0 20px var(--glow);
+			animation: achv-in .4s cubic-bezier(.2, 1.4, .4, 1) both;
+		}
+		.achv-toast .t { color: var(--accent); display: block; }
+		.achv-toast.out { animation: achv-out .4s ease both; }
+		@keyframes achv-in { from { transform: translateX(-120%); opacity: 0; } to { transform: none; opacity: 1; } }
+		@keyframes achv-out { to { transform: translateX(-120%); opacity: 0; } }
 
 		/* ---------- Stats ---------- */
 		.stats {
@@ -361,7 +443,7 @@
 		}
 		.stat:hover { transform: translateY(-5px); border-color: var(--accent); }
 		.stat .num {
-			font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+			font-size: clamp(1.5rem, 3.2vw, 2.1rem);
 			font-weight: 700;
 			color: var(--accent);
 			font-family: 'JetBrains Mono', monospace;
@@ -369,17 +451,17 @@
 		.stat .lbl { color: var(--muted); font-size: .88rem; margin-top: 4px; }
 		@media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 
-		/* ---------- Skill cards ---------- */
+		/* ---------- Skill cards + stat bars ---------- */
 		.cards {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 			gap: 20px;
 		}
 		.card {
 			background: var(--card);
 			border: 1px solid var(--card-border);
 			border-radius: var(--radius);
-			padding: 30px 26px;
+			padding: 28px 24px;
 			position: relative;
 			overflow: hidden;
 			transform-style: preserve-3d;
@@ -398,18 +480,44 @@
 		.card:hover::before { opacity: 1; }
 		.card:hover { border-color: rgba(45, 212, 191, .45); box-shadow: 0 14px 40px rgba(0,0,0,.45); }
 		.card .icon {
-			width: 52px; height: 52px;
+			width: 50px; height: 50px;
 			border-radius: 14px;
 			display: grid;
 			place-items: center;
-			margin-bottom: 18px;
+			margin-bottom: 16px;
 			background: rgba(45, 212, 191, .1);
 			border: 1px solid var(--card-border);
 		}
-		.card .icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
-		.card h3 { font-size: 1.15rem; margin-bottom: 8px; }
-		.card p { color: var(--muted); font-size: .93rem; }
-		.card .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 7px; }
+		.card .icon svg { width: 25px; height: 25px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+		.card h3 { font-size: 1.12rem; margin-bottom: 8px; }
+		.card p { color: var(--muted); font-size: .92rem; }
+		.card .statbar { margin-top: 18px; }
+		.statbar .lab {
+			display: flex;
+			justify-content: space-between;
+			font-family: var(--pixel);
+			font-size: .5rem;
+			color: var(--muted);
+			margin-bottom: 6px;
+		}
+		.statbar .lab b { color: var(--accent); font-weight: 400; }
+		.statbar .track {
+			height: 10px;
+			border-radius: 99px;
+			background: rgba(148, 163, 184, .15);
+			border: 1px solid rgba(148, 163, 184, .15);
+			overflow: hidden;
+		}
+		.statbar .fill {
+			height: 100%;
+			width: 0;
+			border-radius: 99px;
+			background: repeating-linear-gradient(90deg, var(--accent) 0 8px, var(--accent-2) 8px 16px);
+			box-shadow: 0 0 10px var(--glow);
+			transition: width 1.2s cubic-bezier(.2, .8, .2, 1) .3s;
+		}
+		.reveal.visible .statbar .fill { width: var(--w); }
+		.card .tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 7px; }
 		.tag {
 			font-family: 'JetBrains Mono', monospace;
 			font-size: .7rem;
@@ -418,6 +526,72 @@
 			border: 1px solid rgba(56, 189, 248, .2);
 			padding: 3px 9px;
 			border-radius: 999px;
+		}
+
+		/* ---------- Asset Forge ---------- */
+		#assets .forge-head {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: 18px;
+			margin-bottom: 34px;
+		}
+		.marquee {
+			overflow: hidden;
+			position: relative;
+			padding: 6px 0;
+			-webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+			mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+		}
+		.marquee + .marquee { margin-top: 14px; }
+		.mq-track {
+			display: flex;
+			gap: 14px;
+			width: max-content;
+			animation: mq var(--dur, 46s) linear infinite;
+		}
+		.marquee.rev .mq-track { animation-direction: reverse; }
+		.marquee:hover .mq-track { animation-play-state: paused; }
+		@keyframes mq { to { transform: translateX(-50%); } }
+		.pack {
+			flex: none;
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .82rem;
+			color: var(--text);
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			padding: 12px 18px;
+			border-radius: 12px;
+			transition: border-color .2s, transform .2s, box-shadow .2s;
+		}
+		.pack:hover {
+			color: var(--text);
+			border-color: var(--accent);
+			transform: translateY(-3px);
+			box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 14px var(--glow);
+		}
+		.pack .n { color: var(--accent); font-weight: 600; }
+		.pack .d3 { color: var(--accent-3); font-size: .68rem; border: 1px solid rgba(167,139,250,.35); padding: 1px 7px; border-radius: 99px; }
+		.forge-note {
+			margin-top: 26px;
+			color: var(--muted);
+			font-size: .9rem;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+		.forge-note .blip {
+			font-family: var(--pixel);
+			font-size: .52rem;
+			color: #06251f;
+			background: var(--accent);
+			padding: 5px 10px;
+			border-radius: 6px;
 		}
 
 		/* ---------- Projects ---------- */
@@ -463,16 +637,15 @@
 			position: absolute;
 			top: 12px; left: 12px;
 			z-index: 2;
-			font-family: 'JetBrains Mono', monospace;
-			font-size: .68rem;
+			font-family: var(--pixel);
+			font-size: .5rem;
 			letter-spacing: 1px;
-			text-transform: uppercase;
 			color: #06251f;
 			background: var(--accent);
-			padding: 4px 10px;
-			border-radius: 999px;
-			font-weight: 600;
+			padding: 6px 10px;
+			border-radius: 6px;
 		}
+		.project .badge.wip { background: var(--accent-3); color: #1e1038; }
 		.project .body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
 		.project h3 { font-size: 1.15rem; margin-bottom: 8px; }
 		.project p { color: var(--muted); font-size: .92rem; flex: 1; }
@@ -484,9 +657,29 @@
 			display: inline-flex;
 			align-items: center;
 			gap: 6px;
+			transition: gap .25s, color .25s;
 		}
 		.project:hover .link { gap: 11px; color: var(--accent-2); }
-		.project .link { transition: gap .25s, color .25s; }
+
+		/* terminal-style thumb for toolkit card */
+		.thumb.term {
+			background: #04070f;
+			padding: 18px;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .78rem;
+			color: var(--accent);
+			line-height: 2;
+		}
+		.thumb.term::after { background: linear-gradient(180deg, transparent 70%, rgba(7, 11, 20, .85)); }
+		.thumb.term .dim { color: var(--muted); }
+		.thumb.term .ok { color: var(--accent-2); }
+		.thumb.term .cur {
+			display: inline-block;
+			width: 8px; height: 14px;
+			background: var(--accent);
+			vertical-align: middle;
+			animation: blink 1s steps(1) infinite;
+		}
 
 		/* ---------- Timeline ---------- */
 		.timeline { position: relative; padding-left: 30px; max-width: 720px; }
@@ -503,21 +696,20 @@
 		.tl-item::before {
 			content: '';
 			position: absolute;
-			left: -30px; top: 6px;
+			left: 0; top: 6px;
 			width: 16px; height: 16px;
 			border-radius: 50%;
 			background: var(--bg);
 			border: 3px solid var(--accent);
 			box-shadow: 0 0 14px var(--glow);
-			margin-left: 30px;
 		}
 		.tl-item .when {
-			font-family: 'JetBrains Mono', monospace;
-			font-size: .78rem;
+			font-family: var(--pixel);
+			font-size: .55rem;
 			color: var(--accent-2);
 			letter-spacing: 1px;
 		}
-		.tl-item h3 { font-size: 1.12rem; margin: 4px 0 6px; }
+		.tl-item h3 { font-size: 1.12rem; margin: 6px 0 6px; }
 		.tl-item p { color: var(--muted); font-size: .93rem; }
 
 		/* ---------- Contact ---------- */
@@ -607,6 +799,12 @@
 		}
 		footer .socials a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
 		footer .socials svg { width: 18px; height: 18px; fill: currentColor; }
+		footer .stat-line {
+			font-family: var(--pixel);
+			font-size: .5rem;
+			color: rgba(148, 163, 184, .5);
+			margin-top: 14px;
+		}
 
 		/* ---------- Reveal animations ---------- */
 		.reveal {
@@ -640,9 +838,13 @@
 		#toTop.show { opacity: 1; pointer-events: auto; transform: none; }
 		#toTop:hover { background: var(--accent); color: #06251f; }
 
+		body.rainbow { animation: hue 3s linear infinite; }
+		@keyframes hue { to { filter: hue-rotate(360deg); } }
+
 		@media (prefers-reduced-motion: reduce) {
 			*, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 			html { scroll-behavior: auto; }
+			.mq-track { animation: none; flex-wrap: wrap; width: auto; }
 		}
 	</style>
 </head>
@@ -661,24 +863,32 @@
 			<a href="#hero" class="active">Home</a>
 			<a href="#about">About</a>
 			<a href="#skills">Skills</a>
+			<a href="#assets">Assets</a>
 			<a href="#projects">Projects</a>
 			<a href="#journey">Journey</a>
 			<a href="#contact" class="cta">Get in touch</a>
 		</div>
 	</nav>
 
+	<!-- Achievement toasts -->
+	<div id="achv" aria-live="polite"></div>
+
 	<main>
 		<!-- ===== Hero ===== -->
 		<section id="hero">
+			<div class="hud">
+				SCORE <span id="score">0000</span><br />
+				<span class="hi">HI&nbsp;&nbsp;&nbsp;&nbsp;<span id="hiscore">0000</span></span>
+			</div>
 			<div class="hero-grid">
 				<div>
-					<span class="hero-tag reveal"><span class="pulse"></span> Available for collabs &amp; projects</span>
+					<span class="hero-tag reveal"><span class="pulse"></span> PLAYER 1 — READY</span>
 					<h1 class="hero-name reveal d1">Hey, I'm <span class="grad">Rehan Faisal</span></h1>
 					<div class="typeline reveal d2"><span id="typed"></span><span class="caret">&nbsp;</span></div>
 					<p class="hero-desc reveal d3">
 						Indie game dev and CTO of <a href="https://aurasoft.co" target="_blank" rel="noopener"><strong>Aurasoft</strong></a>.
-						I've been building games in <strong>Unity</strong> since my O-Levels — doing the code, the UI/UX,
-						the 3D models and the marketing. Currently cooking some exciting projects, solo and with my team.
+						I build games in <strong>Unity</strong>, ship <strong>2D asset packs</strong> on itch.io,
+						and make <strong>dev tools</strong> that save other creators hours. Been at it since my O-Levels.
 					</p>
 					<div class="btn-row reveal d4">
 						<a class="btn primary" href="#projects">View my work ↓</a>
@@ -687,8 +897,10 @@
 				</div>
 				<div class="hero-ship reveal d2">
 					<div class="ship-ring"></div>
-					<img id="ship" src="images/Ship1.gif" alt="Low-poly spaceship from DASH//BLAST" title="Click me!" />
-					<span class="ship-hint">// click the ship</span>
+					<div class="ship-wrap">
+						<img id="ship" src="images/Ship1.gif" alt="Low-poly spaceship from DASH//BLAST" />
+					</div>
+					<span class="ship-hint">// ASTEROIDS INCOMING — CLICK TO SHOOT</span>
 				</div>
 			</div>
 			<div class="scroll-cue">▾</div>
@@ -696,80 +908,165 @@
 
 		<!-- ===== About + Stats ===== -->
 		<section id="about">
-			<span class="kicker reveal">01 — About</span>
-			<h2 class="section-title reveal d1">A builder in the <span class="grad" style="background:linear-gradient(92deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">digital world</span></h2>
+			<span class="kicker reveal">LEVEL 01 — ABOUT</span>
+			<h2 class="section-title reveal d1" data-text="A builder in the digital world">A builder in the <span class="grad">digital world</span></h2>
 			<p class="section-sub reveal d2">
-				I create 3D models, games and custom RDP solutions, and I work in social media marketing —
-				managing multiple Instagram accounts with tens of millions of views. I previously completed a
-				3-month internship at <a href="https://www.ingeniousc.com/" target="_blank" rel="noopener">Ingenious Concepts</a>,
+				I create games, 3D models, 2D pixel asset packs, dev tools and custom RDP solutions — and I work in
+				social media marketing, managing multiple Instagram accounts with tens of millions of views.
+				I previously completed a 3-month internship at <a href="https://www.ingeniousc.com/" target="_blank" rel="noopener">Ingenious Concepts</a>,
 				gaining hands-on experience in game development, software solutions and team leadership.
-				I'm passionate about blockchain, ethical hacking, and learning skills that help me build, create and grow.
+				Passionate about blockchain, ethical hacking, and anything that helps me build, create and grow.
 			</p>
 			<div class="stats">
 				<div class="stat reveal"><div class="num"><span data-count="6">0</span>+</div><div class="lbl">Years in Unity</div></div>
-				<div class="stat reveal d1"><div class="num"><span data-count="3">0</span>+</div><div class="lbl">Years in Blender</div></div>
-				<div class="stat reveal d2"><div class="num"><span data-count="10">0</span>M+</div><div class="lbl">Views managed</div></div>
-				<div class="stat reveal d3"><div class="num"><span data-count="4">0</span></div><div class="lbl">Fields I work in</div></div>
+				<div class="stat reveal d1"><div class="num"><span data-count="25">0</span>+</div><div class="lbl">Asset packs on itch.io</div></div>
+				<div class="stat reveal d2"><div class="num"><span data-count="9500">0</span>+</div><div class="lbl">Sprites &amp; models published</div></div>
+				<div class="stat reveal d3"><div class="num"><span data-count="10">0</span>M+</div><div class="lbl">Views managed</div></div>
 			</div>
 		</section>
 
 		<!-- ===== Skills ===== -->
 		<section id="skills">
-			<span class="kicker reveal">02 — What I do</span>
-			<h2 class="section-title reveal d1">Skills &amp; services</h2>
+			<span class="kicker reveal">LEVEL 02 — SKILL TREE</span>
+			<h2 class="section-title reveal d1" data-text="Skills & services">Skills &amp; services</h2>
 			<p class="section-sub reveal d2">From prototype to published — I like owning the whole pipeline.</p>
 			<div class="cards">
 				<div class="card tilt reveal">
 					<div class="icon"><svg viewBox="0 0 24 24"><path d="M6 11h4m-2-2v4M15 10h.01M18 13h.01M17.3 5H6.7a4 4 0 0 0-3.9 3.2l-1 5A3.3 3.3 0 0 0 7.5 16l1-1.5h7l1 1.5a3.3 3.3 0 0 0 5.7-2.8l-1-5A4 4 0 0 0 17.3 5Z"/></svg></div>
 					<h3>Game Development</h3>
 					<p>6+ years making games in Unity — from indie projects to company games. Code, design, UI/UX and marketing, end to end.</p>
-					<div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">UI/UX</span><span class="tag">Asset Store</span></div>
+					<div class="statbar"><div class="lab"><span>UNITY / C#</span><b>LV 6+</b></div><div class="track"><div class="fill" style="--w:88%"></div></div></div>
+					<div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">UI/UX</span></div>
 				</div>
 				<div class="card tilt reveal d1">
 					<div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 0v10m9-5-9 5m-9-5 9 5"/></svg></div>
 					<h3>3D Modelling</h3>
 					<p>3+ years of professional low-poly modelling in Blender. Sketching since childhood — the artistic side shows in my work.</p>
+					<div class="statbar"><div class="lab"><span>BLENDER</span><b>LV 3+</b></div><div class="track"><div class="fill" style="--w:74%"></div></div></div>
 					<div class="tags"><span class="tag">Blender</span><span class="tag">Low-poly</span><span class="tag">Game-ready</span></div>
+				</div>
+				<div class="card tilt reveal d2">
+					<div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+					<h3>2D Asset Packs</h3>
+					<p>25+ pixel-art packs on itch.io — spaceships, turrets, houses, loot and more. Built with an AI-assisted pipeline plus my own batch tools for cleanup, palettes and variants.</p>
+					<div class="statbar"><div class="lab"><span>ASSET FORGE</span><b>9,500+ SPRITES</b></div><div class="track"><div class="fill" style="--w:92%"></div></div></div>
+					<div class="tags"><span class="tag">Pixel art</span><span class="tag">AI-assisted</span><span class="tag">itch.io</span></div>
+				</div>
+				<div class="card tilt reveal d3">
+					<div class="icon"><svg viewBox="0 0 24 24"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13 5l-2 14"/></svg></div>
+					<h3>Tool Development</h3>
+					<p>I build the tools I wish existed — batch sprite customizers, palette systems, and an itch.io toolkit extension currently in the works.</p>
+					<div class="statbar"><div class="lab"><span>TOOLING</span><b>2 SHIPPED</b></div><div class="track"><div class="fill" style="--w:66%"></div></div></div>
+					<div class="tags"><span class="tag">Desktop apps</span><span class="tag">Extensions</span><span class="tag">Automation</span></div>
 				</div>
 				<div class="card tilt reveal d2">
 					<div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div>
 					<h3>RDP / VPS Solutions</h3>
 					<p>Affordable, fast UK-based RDP/VPS for personal and business use — custom setups for work, gaming or hosting.</p>
-					<div class="tags"><span class="tag">London</span><span class="tag">99.9% uptime</span><span class="tag">Custom specs</span></div>
+					<div class="statbar"><div class="lab"><span>UPTIME</span><b>99.9%</b></div><div class="track"><div class="fill" style="--w:99%"></div></div></div>
+					<div class="tags"><span class="tag">London</span><span class="tag">Custom specs</span></div>
 				</div>
 				<div class="card tilt reveal d3">
 					<div class="icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8m0 0h-5m5 0v5"/></svg></div>
 					<h3>Social Media Marketing</h3>
 					<p>Managing multiple Instagram accounts with tens of millions of views. Growth, content strategy and analytics.</p>
-					<div class="tags"><span class="tag">Instagram</span><span class="tag">Growth</span><span class="tag">Content</span></div>
+					<div class="statbar"><div class="lab"><span>REACH</span><b>10M+ VIEWS</b></div><div class="track"><div class="fill" style="--w:82%"></div></div></div>
+					<div class="tags"><span class="tag">Instagram</span><span class="tag">Growth</span></div>
 				</div>
 			</div>
 		</section>
 
+		<!-- ===== Asset Forge ===== -->
+		<section id="assets">
+			<span class="kicker reveal">LEVEL 03 — ASSET FORGE</span>
+			<div class="forge-head">
+				<div>
+					<h2 class="section-title reveal d1" data-text="9,500+ sprites. Free on itch.io.">9,500+ sprites. <span class="grad">Free on itch.io.</span></h2>
+					<p class="section-sub reveal d2" style="margin-bottom:0;">
+						I run an asset forge: 25+ 2D pixel &amp; 3D low-poly packs, almost all free / pay-what-you-want.
+						Made with an AI-assisted workflow, then cleaned, palette-mapped and batch-processed with my own tools.
+						Hover to stop the conveyor — click any pack to grab it.
+					</p>
+				</div>
+				<a class="btn primary reveal d3" href="https://rehandev.itch.io/" target="_blank" rel="noopener">Browse all on itch.io →</a>
+			</div>
+
+			<div class="marquee reveal">
+				<div class="mq-track" data-dup>
+					<a class="pack" href="https://rehandev.itch.io/1500-spaceships-asteroids-and-space-junks" target="_blank" rel="noopener"><span class="n">1500+</span> Spaceships, Asteroids &amp; Space Junk</a>
+					<a class="pack" href="https://rehandev.itch.io/1100-military-pack-4-in-1-pack" target="_blank" rel="noopener"><span class="n">1100+</span> Military Vehicles, Guns &amp; Turrets</a>
+					<a class="pack" href="https://rehandev.itch.io/590-pixel-cargo-tech-laboratory-loot" target="_blank" rel="noopener"><span class="n">590+</span> Cargo, Tech &amp; Lab Loot</a>
+					<a class="pack" href="https://rehandev.itch.io/500-deadly-traps-batch-color-replacer-software" target="_blank" rel="noopener"><span class="n">500+</span> Deadly Traps</a>
+					<a class="pack" href="https://rehandev.itch.io/480-spaceships-topdown-pixel" target="_blank" rel="noopener"><span class="n">480+</span> Top-Down Spaceships</a>
+					<a class="pack" href="https://rehandev.itch.io/480-furniture-pack-modern-old-dungeon-futuristic-gaming-nature" target="_blank" rel="noopener"><span class="n">480+</span> Furniture (6 themes)</a>
+					<a class="pack" href="https://rehandev.itch.io/450-pixel-car-pack" target="_blank" rel="noopener"><span class="n">450+</span> Cars &amp; Vehicles</a>
+					<a class="pack" href="https://rehandev.itch.io/450-pixel-dead-animals" target="_blank" rel="noopener"><span class="n">450+</span> Dead Animals</a>
+					<a class="pack" href="https://rehandev.itch.io/400-underwater-loot-and-junk" target="_blank" rel="noopener"><span class="n">400+</span> Underwater Loot &amp; Junk</a>
+					<a class="pack" href="https://rehandev.itch.io/370-pixel-houses-scifi-post-apocalyptic-modern-farm-normal" target="_blank" rel="noopener"><span class="n">370+</span> Pixel Houses (5 themes)</a>
+				</div>
+			</div>
+			<div class="marquee rev reveal d1">
+				<div class="mq-track" data-dup style="--dur: 52s;">
+					<a class="pack" href="https://rehandev.itch.io/350-guns-mega-pack" target="_blank" rel="noopener"><span class="n">350+</span> Guns Mega Pack</a>
+					<a class="pack" href="https://rehandev.itch.io/340-pixel-bones-and-skeletons" target="_blank" rel="noopener"><span class="n">340+</span> Bones &amp; Skeletons</a>
+					<a class="pack" href="https://rehandev.itch.io/330pixel-military-vehicle" target="_blank" rel="noopener"><span class="n">330+</span> Military Vehicles</a>
+					<a class="pack" href="https://rehandev.itch.io/320-turrets-mega-pixel-pack" target="_blank" rel="noopener"><span class="n">320+</span> Turrets Mega Pack</a>
+					<a class="pack" href="https://rehandev.itch.io/300-asteroid-and-space-junk-pixel" target="_blank" rel="noopener"><span class="n">300+</span> Asteroids &amp; Space Junk</a>
+					<a class="pack" href="https://rehandev.itch.io/280-mega-pixel-space-ship-pack-2d" target="_blank" rel="noopener"><span class="n">280+</span> Mega Space Ships</a>
+					<a class="pack" href="https://rehandev.itch.io/210-pixel-paintings" target="_blank" rel="noopener"><span class="n">210+</span> Pixel Paintings</a>
+					<a class="pack" href="https://rehandev.itch.io/100-pink-pixel-weapons-pack" target="_blank" rel="noopener"><span class="n">100+</span> Pink Pixel Weapons</a>
+					<a class="pack" href="https://rehandev.itch.io/ultimate-3d-barrier-and-fences-pack" target="_blank" rel="noopener"><span class="d3">3D</span> <span class="n">250+</span> Barriers &amp; Fences</a>
+					<a class="pack" href="https://rehandev.itch.io/3-spaceships-3d-low-poly-pack" target="_blank" rel="noopener"><span class="d3">3D</span> Low-Poly Spaceship Pack</a>
+				</div>
+			</div>
+			<p class="forge-note reveal d2"><span class="blip">NEW PACKS REGULARLY</span> Every pack lives on <a href="https://rehandev.itch.io/" target="_blank" rel="noopener">rehandev.itch.io</a> — follow there to get notified when the forge fires again.</p>
+		</section>
+
 		<!-- ===== Projects ===== -->
 		<section id="projects">
-			<span class="kicker reveal">03 — Work</span>
-			<h2 class="section-title reveal d1">Projects &amp; things I've shipped</h2>
-			<p class="section-sub reveal d2">A mix of personal games, company work and services.</p>
+			<span class="kicker reveal">LEVEL 04 — PROJECTS</span>
+			<h2 class="section-title reveal d1" data-text="Things I've shipped">Things I've shipped</h2>
+			<p class="section-sub reveal d2">Games, tools, company work and services.</p>
 			<div class="projects">
 				<a class="project reveal" href="https://rehandev.itch.io/dashblast-demo-version" target="_blank" rel="noopener">
-					<div class="thumb"><span class="badge">Featured</span><img src="images/DashBlast.png" alt="DASH//BLAST gameplay screenshot" loading="lazy" /></div>
+					<div class="thumb"><span class="badge">FEATURED</span><img src="images/DashBlast.png" alt="DASH//BLAST gameplay screenshot" loading="lazy" /></div>
 					<div class="body">
 						<h3>DASH//BLAST</h3>
-						<p>My indie game — a fast top-down mech shooter built in Unity. Pre-demo version out now, playable on itch.io.</p>
+						<p>My indie game — dash and blast through robotic foes in a fast-paced shooter. Survive, strategize and beat powerful bosses. Demo on itch.io.</p>
 						<span class="link">Play the demo →</span>
 					</div>
 				</a>
-				<a class="project reveal d1" href="https://rehandev.itch.io/" target="_blank" rel="noopener">
-					<div class="thumb"><span class="badge">itch.io</span><img src="images/banner.png" alt="Rehan's itch.io banner" loading="lazy" /></div>
+				<a class="project reveal d1" href="https://rehandev.itch.io/easy-batch-customizer-pro" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">SOFTWARE</span><img src="images/BatchCustomizer.jpg" alt="Easy Batch Customizer Pro — convert thousands of assets at once" loading="lazy" /></div>
+					<div class="body">
+						<h3>Easy Batch Customizer Pro</h3>
+						<p>Stop recoloring sprites one by one. Bulk-recolor hundreds of PNGs at once — gradients, patterns, retro palette snapping (PICO-8, GameBoy, NES), dithering, outlines and more.</p>
+						<span class="link">Get it on itch.io →</span>
+					</div>
+				</a>
+				<a class="project reveal d2" href="/toolkit/">
+					<div class="thumb term">
+						<span class="badge wip">IN DEVELOPMENT</span>
+						<span class="dim">$</span> install itch-toolkit<br />
+						<span class="ok">▸ analytics · widgets · page CSS</span><br />
+						<span class="dim">▸ status:</span> coming soon <span class="cur"></span>
+					</div>
+					<div class="body">
+						<h3>Itch Toolkit Extension</h3>
+						<p>A browser extension that supercharges your itch.io creator dashboard — analytics, widgets and page styling tools. Currently in the lab.</p>
+						<span class="link">Sneak peek →</span>
+					</div>
+				</a>
+				<a class="project reveal d3" href="https://rehandev.itch.io/" target="_blank" rel="noopener">
+					<div class="thumb"><span class="badge">ITCH.IO</span><img src="images/banner.png" alt="Rehan's itch.io banner" loading="lazy" /></div>
 					<div class="body">
 						<h3>Personal Projects</h3>
-						<p>My solo experiments and games, all uploaded on itch.io — prototypes, jams and passion projects.</p>
+						<p>My solo experiments, games and the whole asset forge — all uploaded on itch.io. Prototypes, jams and passion projects.</p>
 						<span class="link">Browse itch.io →</span>
 					</div>
 				</a>
 				<a class="project reveal d2" href="https://aurasoft.co/index.php/portfolio/portfolio-masonry/1-portfolio-masonry/" target="_blank" rel="noopener">
-					<div class="thumb"><span class="badge">Aurasoft</span><img src="images/AurasoftBanner1.png" alt="Aurasoft website banner" loading="lazy" /></div>
+					<div class="thumb"><span class="badge">AURASOFT</span><img src="images/AurasoftBanner1.png" alt="Aurasoft website banner" loading="lazy" /></div>
 					<div class="body">
 						<h3>Company Games</h3>
 						<p>Games I've worked on as CTO at Aurasoft — a software company doing game, web and app development.</p>
@@ -777,7 +1074,7 @@
 					</div>
 				</a>
 				<a class="project reveal d3" href="https://aurasoft.co/index.php/aura-rdp-vps/" target="_blank" rel="noopener">
-					<div class="thumb"><span class="badge">Service</span><img src="images/RdpBanner.png" alt="Aura RDP/VPS pricing plans" loading="lazy" /></div>
+					<div class="thumb"><span class="badge">SERVICE</span><img src="images/RdpBanner.png" alt="Aura RDP/VPS pricing plans" loading="lazy" /></div>
 					<div class="body">
 						<h3>Aura RDP / VPS</h3>
 						<p>Custom London-based RDP and VPS plans from $4.99/mo. Order through the site or just email me directly.</p>
@@ -785,7 +1082,7 @@
 					</div>
 				</a>
 				<a class="project reveal d4" href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">
-					<div class="thumb"><span class="badge">Devlogs</span><img src="images/Xbanner.png" alt="RehanDev on X" loading="lazy" /></div>
+					<div class="thumb"><span class="badge">DEVLOGS</span><img src="images/Xbanner.png" alt="RehanDev on X" loading="lazy" /></div>
 					<div class="body">
 						<h3>Devlogs on X</h3>
 						<p>I post devlogs and progress on my games over on X — follow to know the moment new projects drop.</p>
@@ -797,8 +1094,8 @@
 
 		<!-- ===== Journey ===== -->
 		<section id="journey">
-			<span class="kicker reveal">04 — Journey</span>
-			<h2 class="section-title reveal d1">How I got here</h2>
+			<span class="kicker reveal">LEVEL 05 — JOURNEY</span>
+			<h2 class="section-title reveal d1" data-text="How I got here">How I got here</h2>
 			<div class="timeline" style="margin-top: 36px;">
 				<div class="tl-item reveal">
 					<span class="when">O-LEVELS</span>
@@ -812,22 +1109,22 @@
 				</div>
 				<div class="tl-item reveal d2">
 					<span class="when">NOW</span>
-					<h3>CTO @ Aurasoft</h3>
-					<p>Leading tech at Aurasoft while building my own games — including DASH//BLAST — and running RDP/VPS services on the side.</p>
+					<h3>CTO @ Aurasoft + the Asset Forge</h3>
+					<p>Leading tech at Aurasoft, building DASH//BLAST, shipping 25+ asset packs and dev tools like Easy Batch Customizer Pro on itch.io.</p>
 				</div>
 				<div class="tl-item reveal d3">
 					<span class="when">NEXT</span>
-					<h3>Exciting projects incoming…</h3>
-					<p>Working on new things solo and with the team. Follow me on <a href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">X</a> to catch them when they drop.</p>
+					<h3>Itch Toolkit Extension &amp; more…</h3>
+					<p>An itch.io creator toolkit extension is in the lab, plus new games and packs. Follow me on <a href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">X</a> to catch them when they drop.</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- ===== Contact ===== -->
 		<section id="contact">
-			<span class="kicker reveal">05 — Contact</span>
-			<h2 class="section-title reveal d1">Let's build something</h2>
-			<p class="section-sub reveal d2">Business queries, collaborations, or RDP/VPS orders — my inbox is open.</p>
+			<span class="kicker reveal">FINAL LEVEL — CONTACT</span>
+			<h2 class="section-title reveal d1" data-text="Let's build something">Let's build something</h2>
+			<p class="section-sub reveal d2">Business queries, collaborations, asset pack requests, tool support or RDP/VPS orders — my inbox is open.</p>
 			<div class="contact-grid">
 				<form class="reveal" target="_blank" action="https://formsubmit.co/rehanfaisal123@gmail.com" method="POST">
 					<div class="field">
@@ -881,6 +1178,7 @@
 			<a href="https://aurasoft.co" target="_blank" rel="noopener" aria-label="Aurasoft"><svg viewBox="0 0 24 24"><path d="M12 2 2 19h20L12 2Zm0 5.3L17.7 17H6.3L12 7.3Z"/></svg></a>
 		</div>
 		<p>&copy; 2026 Rehan Faisal — designed &amp; built with too much coffee ☕</p>
+		<p class="stat-line">ASTEROIDS DESTROYED THIS VISIT: <span id="footKills">0</span> // THANKS FOR PLAYING</p>
 	</footer>
 
 	<button id="toTop" aria-label="Back to top">↑</button>
@@ -890,11 +1188,26 @@
 		'use strict';
 		var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		/* ---------- Starfield ---------- */
+		/* =========================================================
+		   Starfield + Asteroid Defense mini-game (one canvas)
+		   ========================================================= */
 		var canvas = document.getElementById('stars');
 		var ctx = canvas.getContext('2d');
-		var stars = [], shooting = [], W, H;
-		var mouse = { x: .5, y: .5 };
+		var W, H;
+		var stars = [], shooting = [];
+		var asteroids = [], beams = [], particles = [], pops = [];
+		var mouse = { x: .5, y: .5, px: 0, py: 0 };
+		var heroEl = document.getElementById('hero');
+		var heroVisible = true;
+		var score = 0, kills = 0;
+		var hiscore = 0;
+		try { hiscore = +localStorage.getItem('rehan_hiscore') || 0; } catch (e) {}
+		var scoreEl = document.getElementById('score');
+		var hiEl = document.getElementById('hiscore');
+		var footKills = document.getElementById('footKills');
+
+		function pad(n) { return ('0000' + n).slice(-4); }
+		hiEl.textContent = pad(hiscore);
 
 		function resize() {
 			W = canvas.width = window.innerWidth;
@@ -905,7 +1218,7 @@
 				stars.push({
 					x: Math.random() * W,
 					y: Math.random() * H,
-					z: Math.random() * .8 + .2,      // depth for parallax
+					z: Math.random() * .8 + .2,
 					r: Math.random() * 1.4 + .3,
 					tw: Math.random() * Math.PI * 2,
 					sp: Math.random() * .06 + .01
@@ -924,32 +1237,227 @@
 			});
 		}
 
+		/* ---- asteroids ---- */
+		function makeAsteroid(x, y, r) {
+			var verts = [];
+			var vn = 8 + Math.floor(Math.random() * 4);
+			for (var i = 0; i < vn; i++) {
+				verts.push(.72 + Math.random() * .4);
+			}
+			var side = Math.random() < .5 ? -1 : 1;
+			return {
+				x: x !== undefined ? x : (side < 0 ? -40 : W + 40),
+				y: y !== undefined ? y : 90 + Math.random() * (H * .6),
+				r: r || (18 + Math.random() * 22),
+				vx: (x !== undefined ? (Math.random() - .5) * 1.6 : side * -1 * (0.35 + Math.random() * .55)),
+				vy: (Math.random() - .5) * .5,
+				rot: Math.random() * Math.PI * 2,
+				vr: (Math.random() - .5) * .02,
+				verts: verts
+			};
+		}
+
+		function spawnAsteroid() {
+			if (document.hidden || reduceMotion || !heroVisible) return;
+			if (asteroids.length < 6) asteroids.push(makeAsteroid());
+		}
+
+		function drawAsteroid(a) {
+			ctx.save();
+			ctx.translate(a.x, a.y);
+			ctx.rotate(a.rot);
+			ctx.beginPath();
+			for (var i = 0; i < a.verts.length; i++) {
+				var ang = (i / a.verts.length) * Math.PI * 2;
+				var rr = a.r * a.verts[i];
+				var px = Math.cos(ang) * rr, py = Math.sin(ang) * rr;
+				i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+			}
+			ctx.closePath();
+			ctx.fillStyle = 'rgba(40, 52, 74, .9)';
+			ctx.strokeStyle = 'rgba(148, 180, 210, .5)';
+			ctx.lineWidth = 1.5;
+			ctx.fill();
+			ctx.stroke();
+			// crater
+			ctx.beginPath();
+			ctx.arc(a.r * .25, -a.r * .15, a.r * .22, 0, Math.PI * 2);
+			ctx.strokeStyle = 'rgba(148, 180, 210, .25)';
+			ctx.stroke();
+			ctx.restore();
+		}
+
+		function explode(x, y, big) {
+			var n = big ? 26 : 14;
+			for (var i = 0; i < n; i++) {
+				var ang = Math.random() * Math.PI * 2;
+				var sp = 1 + Math.random() * (big ? 5 : 3.2);
+				particles.push({
+					x: x, y: y,
+					vx: Math.cos(ang) * sp,
+					vy: Math.sin(ang) * sp,
+					life: 1,
+					col: Math.random() < .5 ? '94, 234, 212' : (Math.random() < .5 ? '56, 189, 248' : '226, 232, 240'),
+					sz: 1.5 + Math.random() * 2.5
+				});
+			}
+			pops.push({ x: x, y: y, t: 0, txt: '+' + (big ? 25 : 10) });
+		}
+
+		/* ---- ship aiming ---- */
+		var ship = document.getElementById('ship');
+		var shipWrap = document.querySelector('.ship-wrap');
+		var shipAngle = 0, targetAngle = 0;
+
+		function shipCenter() {
+			var r = ship.getBoundingClientRect();
+			return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+		}
+
+		function aimLoop() {
+			if (heroVisible && !reduceMotion) {
+				var c = shipCenter();
+				var dx = mouse.px - c.x, dy = mouse.py - c.y;
+				if (Math.abs(dx) + Math.abs(dy) > 40) {
+					targetAngle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+				}
+				// shortest-path lerp
+				var diff = ((targetAngle - shipAngle + 540) % 360) - 180;
+				shipAngle += diff * .12;
+				ship.style.transform = 'rotate(' + shipAngle.toFixed(2) + 'deg)';
+			}
+			requestAnimationFrame(aimLoop);
+		}
+
+		/* ---- firing ---- */
+		var lastShot = 0;
+		var konami = [];
+		var KCODE = [38,38,40,40,37,39,37,39,66,65];
+		var rainbowMode = false;
+
+		function fire(tx, ty) {
+			var now = Date.now();
+			if (now - lastShot < 180) return;
+			lastShot = now;
+			var c = shipCenter();
+			var dx = tx - c.x, dy = ty - c.y;
+			var len = Math.hypot(dx, dy) || 1;
+			var ux = dx / len, uy = dy / len;
+			var endX = c.x + ux * 2200, endY = c.y + uy * 2200;
+
+			// hit test: nearest asteroid along ray
+			var best = null, bestT = Infinity;
+			for (var i = 0; i < asteroids.length; i++) {
+				var a = asteroids[i];
+				var t = (a.x - c.x) * ux + (a.y - c.y) * uy;
+				if (t < 0) continue;
+				var cx = c.x + ux * t, cy = c.y + uy * t;
+				var d = Math.hypot(a.x - cx, a.y - cy);
+				if (d < a.r && t < bestT) { bestT = t; best = i; }
+			}
+			if (best !== null) {
+				var a = asteroids[best];
+				endX = c.x + ux * bestT; endY = c.y + uy * bestT;
+				asteroids.splice(best, 1);
+				var big = a.r > 26;
+				explode(a.x, a.y, big);
+				if (big) {
+					// split into two chunks
+					asteroids.push(makeAsteroid(a.x - 10, a.y, a.r * .55));
+					asteroids.push(makeAsteroid(a.x + 10, a.y, a.r * .55));
+				}
+				score += big ? 25 : 10;
+				kills++;
+				scoreEl.textContent = pad(score);
+				if (footKills) footKills.textContent = kills;
+				if (score > hiscore) {
+					hiscore = score;
+					hiEl.textContent = pad(hiscore);
+					try { localStorage.setItem('rehan_hiscore', hiscore); } catch (e) {}
+				}
+				if (kills === 1) achieve('FIRST BLOOD', 'Asteroid destroyed. The site is safe… for now.');
+				if (kills === 10) achieve('ACE PILOT', '10 asteroids down. DASH//BLAST needs you.');
+				if (kills === 25) achieve('VOID CLEANER', '25 kills. Okay now scroll down and hire me.');
+			}
+			beams.push({ x1: c.x, y1: c.y, x2: endX, y2: endY, life: 1 });
+			shipWrap.classList.remove('firing');
+			void shipWrap.offsetWidth;
+			shipWrap.classList.add('firing');
+			setTimeout(function () { shipWrap.classList.remove('firing'); }, 120);
+		}
+
+		/* ---- main draw loop ---- */
 		function draw() {
 			ctx.clearRect(0, 0, W, H);
 			var ox = (mouse.x - .5) * 30, oy = (mouse.y - .5) * 30;
-			for (var i = 0; i < stars.length; i++) {
-				var s = stars[i];
+			var i, s;
+
+			for (i = 0; i < stars.length; i++) {
+				s = stars[i];
 				s.tw += s.sp;
-				var a = .35 + Math.abs(Math.sin(s.tw)) * .65;
+				var alpha = .35 + Math.abs(Math.sin(s.tw)) * .65;
 				ctx.beginPath();
 				ctx.arc(s.x - ox * s.z, s.y - oy * s.z, s.r, 0, Math.PI * 2);
-				ctx.fillStyle = 'rgba(180, 225, 255,' + (a * s.z).toFixed(3) + ')';
+				ctx.fillStyle = 'rgba(180, 225, 255,' + (alpha * s.z).toFixed(3) + ')';
 				ctx.fill();
 			}
-			for (var j = shooting.length - 1; j >= 0; j--) {
-				var m = shooting[j];
+
+			for (i = shooting.length - 1; i >= 0; i--) {
+				var m = shooting[i];
 				m.x += m.vx; m.y += m.vy; m.life -= .018;
-				if (m.life <= 0 || m.x > W || m.y > H) { shooting.splice(j, 1); continue; }
-				var grad = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 9, m.y - m.vy * 9);
-				grad.addColorStop(0, 'rgba(94, 234, 212,' + m.life.toFixed(2) + ')');
-				grad.addColorStop(1, 'rgba(94, 234, 212, 0)');
-				ctx.strokeStyle = grad;
+				if (m.life <= 0 || m.x > W || m.y > H) { shooting.splice(i, 1); continue; }
+				var g = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 9, m.y - m.vy * 9);
+				g.addColorStop(0, 'rgba(94, 234, 212,' + m.life.toFixed(2) + ')');
+				g.addColorStop(1, 'rgba(94, 234, 212, 0)');
+				ctx.strokeStyle = g;
 				ctx.lineWidth = 1.6;
 				ctx.beginPath();
 				ctx.moveTo(m.x, m.y);
 				ctx.lineTo(m.x - m.vx * 9, m.y - m.vy * 9);
 				ctx.stroke();
 			}
+
+			if (heroVisible) {
+				for (i = asteroids.length - 1; i >= 0; i--) {
+					var a = asteroids[i];
+					a.x += a.vx; a.y += a.vy; a.rot += a.vr;
+					if (a.x < -80 || a.x > W + 80 || a.y < -80 || a.y > H + 80) { asteroids.splice(i, 1); continue; }
+					drawAsteroid(a);
+				}
+			}
+
+			for (i = beams.length - 1; i >= 0; i--) {
+				var b = beams[i];
+				b.life -= .1;
+				if (b.life <= 0) { beams.splice(i, 1); continue; }
+				ctx.strokeStyle = rainbowMode
+					? 'hsla(' + (Date.now() / 4 % 360) + ', 90%, 65%,' + b.life.toFixed(2) + ')'
+					: 'rgba(45, 212, 191,' + b.life.toFixed(2) + ')';
+				ctx.lineWidth = 2.5 * b.life + .5;
+				ctx.beginPath();
+				ctx.moveTo(b.x1, b.y1);
+				ctx.lineTo(b.x2, b.y2);
+				ctx.stroke();
+			}
+
+			for (i = particles.length - 1; i >= 0; i--) {
+				var p = particles[i];
+				p.x += p.vx; p.y += p.vy; p.vx *= .97; p.vy *= .97; p.life -= .02;
+				if (p.life <= 0) { particles.splice(i, 1); continue; }
+				ctx.fillStyle = 'rgba(' + p.col + ',' + p.life.toFixed(2) + ')';
+				ctx.fillRect(p.x, p.y, p.sz, p.sz);
+			}
+
+			ctx.textAlign = 'center';
+			ctx.font = '700 13px "JetBrains Mono", monospace';
+			for (i = pops.length - 1; i >= 0; i--) {
+				var q = pops[i];
+				q.t += .025;
+				if (q.t >= 1) { pops.splice(i, 1); continue; }
+				ctx.fillStyle = 'rgba(94, 234, 212,' + (1 - q.t).toFixed(2) + ')';
+				ctx.fillText(q.txt, q.x, q.y - q.t * 34);
+			}
+
 			requestAnimationFrame(draw);
 		}
 
@@ -957,33 +1465,93 @@
 		document.addEventListener('mousemove', function (e) {
 			mouse.x = e.clientX / W;
 			mouse.y = e.clientY / H;
+			mouse.px = e.clientX;
+			mouse.py = e.clientY;
 		});
 		resize();
+
 		if (!reduceMotion) {
 			draw();
+			aimLoop();
 			setInterval(spawnShooter, 3800);
+			setInterval(spawnAsteroid, 2200);
+			for (var k = 0; k < 3; k++) spawnAsteroid();
 		} else {
-			// static stars for reduced motion
-			(function once() {
-				ctx.clearRect(0, 0, W, H);
-				for (var i = 0; i < stars.length; i++) {
-					var s = stars[i];
-					ctx.beginPath();
-					ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-					ctx.fillStyle = 'rgba(180, 225, 255,' + (.6 * s.z).toFixed(3) + ')';
-					ctx.fill();
-				}
-			})();
+			ctx.clearRect(0, 0, W, H);
+			for (var si = 0; si < stars.length; si++) {
+				var st = stars[si];
+				ctx.beginPath();
+				ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+				ctx.fillStyle = 'rgba(180, 225, 255,' + (.6 * st.z).toFixed(3) + ')';
+				ctx.fill();
+			}
 		}
 
-		/* ---------- Typewriter ---------- */
+		var heroObs = new IntersectionObserver(function (entries) {
+			heroVisible = entries[0].isIntersecting;
+			if (!heroVisible && !reduceMotion) {
+				// let ship settle back upright
+				targetAngle = 0;
+			}
+		}, { threshold: .15 });
+		heroObs.observe(heroEl);
+
+		// click / tap to shoot (only inside hero, not on links)
+		heroEl.addEventListener('pointerdown', function (e) {
+			if (reduceMotion) return;
+			if (e.target.closest('a, button, input, textarea')) return;
+			mouse.px = e.clientX; mouse.py = e.clientY;
+			fire(e.clientX, e.clientY);
+			shipWrap.classList.remove('boost');
+			void shipWrap.offsetWidth;
+			shipWrap.classList.add('boost');
+		});
+		document.addEventListener('keydown', function (e) {
+			// konami
+			konami.push(e.keyCode);
+			if (konami.length > KCODE.length) konami.shift();
+			if (konami.join(',') === KCODE.join(',')) {
+				rainbowMode = true;
+				document.body.classList.add('rainbow');
+				for (var i = 0; i < 8; i++) asteroids.push(makeAsteroid());
+				achieve('?? SECRET ??', 'Konami code accepted. Rainbow lasers online.');
+			}
+			if (e.code === 'Space' && heroVisible && !reduceMotion &&
+				!e.target.closest('input, textarea') ) {
+				e.preventDefault();
+				fire(mouse.px || W / 2, mouse.py || H * .3);
+			}
+		});
+
+		/* =========================================================
+		   Achievements
+		   ========================================================= */
+		var achDone = {};
+		function achieve(title, text) {
+			if (achDone[title]) return;
+			achDone[title] = true;
+			var box = document.getElementById('achv');
+			var el = document.createElement('div');
+			el.className = 'achv-toast';
+			el.innerHTML = '<span class="t">🏆 ' + title + '</span>' + text;
+			box.appendChild(el);
+			setTimeout(function () {
+				el.classList.add('out');
+				setTimeout(function () { el.remove(); }, 450);
+			}, 4200);
+		}
+
+		/* =========================================================
+		   Typewriter
+		   ========================================================= */
 		var roles = [
 			'Indie Game Developer',
 			'Unity Developer — 6+ years',
+			'2D Asset Pack Creator',
 			'3D Artist (Blender)',
+			'Tool Developer',
 			'CTO @ Aurasoft',
-			'RDP / VPS Provider',
-			'Social Media Marketer'
+			'RDP / VPS Provider'
 		];
 		var typedEl = document.getElementById('typed');
 		var ri = 0, ci = 0, deleting = false;
@@ -1003,7 +1571,9 @@
 		}
 		type();
 
-		/* ---------- Scroll: nav state, reveal, counters, scroll-spy ---------- */
+		/* =========================================================
+		   Scroll: nav state, reveal, counters, scroll-spy
+		   ========================================================= */
 		var nav = document.getElementById('topnav');
 		var toTop = document.getElementById('toTop');
 		window.addEventListener('scroll', function () {
@@ -1029,7 +1599,8 @@
 			function step(ts) {
 				if (!t0) t0 = ts;
 				var p = Math.min((ts - t0) / dur, 1);
-				el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+				var v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+				el.textContent = v.toLocaleString('en-US');
 				if (p < 1) requestAnimationFrame(step);
 			}
 			requestAnimationFrame(step);
@@ -1052,12 +1623,17 @@
 					navAnchors.forEach(function (a) {
 						a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id);
 					});
+					if (en.target.id === 'contact') {
+						achieve('EXPLORER', 'You reached the final level. Say hi!');
+					}
 				}
 			});
 		}, { rootMargin: '-42% 0px -52% 0px' });
 		sections.forEach(function (s) { spyObs.observe(s); });
 
-		/* ---------- Mobile menu ---------- */
+		/* =========================================================
+		   Mobile menu
+		   ========================================================= */
 		var burger = document.getElementById('hamburger');
 		var links = document.getElementById('navLinks');
 		burger.addEventListener('click', function () { links.classList.toggle('open'); });
@@ -1065,7 +1641,9 @@
 			a.addEventListener('click', function () { links.classList.remove('open'); });
 		});
 
-		/* ---------- Card tilt + glow ---------- */
+		/* =========================================================
+		   Card tilt + glow
+		   ========================================================= */
 		var fine = window.matchMedia('(pointer: fine)').matches;
 		if (fine && !reduceMotion) {
 			document.querySelectorAll('.card').forEach(function (card) {
@@ -1085,19 +1663,19 @@
 			});
 		}
 
-		/* ---------- Ship easter egg ---------- */
-		var ship = document.getElementById('ship');
-		var clicks = 0;
-		ship.addEventListener('click', function () {
-			ship.classList.remove('boost');
-			void ship.offsetWidth; // restart animation
-			ship.classList.add('boost');
-			clicks++;
-			if (clicks === 5) {
-				var hint = document.querySelector('.ship-hint');
-				if (hint) hint.textContent = '// ok pilot, go play DASH//BLAST instead 🚀';
-			}
-			for (var i = 0; i < 6; i++) spawnShooter();
+		/* =========================================================
+		   Marquee duplication for seamless loop
+		   ========================================================= */
+		document.querySelectorAll('[data-dup]').forEach(function (track) {
+			track.innerHTML += track.innerHTML;
+		});
+
+		/* =========================================================
+		   Title easter egg on tab switch
+		   ========================================================= */
+		var realTitle = document.title;
+		document.addEventListener('visibilitychange', function () {
+			document.title = document.hidden ? '⏸ PAUSED — Rehan Faisal' : realTitle;
 		});
 	})();
 	</script>
