@@ -59,6 +59,51 @@
 			pointer-events: none;
 		}
 
+		/* ---------- custom cursor ---------- */
+		#cur, #curRing {
+			position: fixed; top: 0; left: 0;
+			z-index: 999;
+			pointer-events: none;
+			opacity: 0;
+			transition: opacity .25s;
+		}
+		body.cursor-on #cur, body.cursor-on #curRing { opacity: 1; }
+		body.cursor-on, body.cursor-on * { cursor: none !important; }
+		#cur {
+			width: 8px; height: 8px;
+			margin: -4px 0 0 -4px;
+			background: var(--accent);
+			border-radius: 50%;
+			box-shadow: 0 0 10px var(--accent);
+		}
+		#curRing {
+			width: 34px; height: 34px;
+			margin: -17px 0 0 -17px;
+			border: 1.5px solid rgba(45, 212, 191, .65);
+			border-radius: 50%;
+			color: rgba(251, 113, 133, .85);
+			transition: width .2s, height .2s, margin .2s, border-color .2s, opacity .25s;
+		}
+		#curRing.hov {
+			width: 54px; height: 54px;
+			margin: -27px 0 0 -27px;
+			border-color: var(--accent-2);
+		}
+		#curRing.down { border-color: var(--danger); }
+		/* crosshair ticks while aiming in the hero */
+		#curRing.aim { border-color: rgba(251, 113, 133, .8); }
+		#curRing.aim::before, #curRing.aim::after { content: ''; position: absolute; }
+		#curRing.aim::before {
+			left: -10px; right: -10px; top: 50%;
+			height: 2px; margin-top: -1px;
+			background: linear-gradient(90deg, currentColor 8px, transparent 8px, transparent calc(100% - 8px), currentColor calc(100% - 8px));
+		}
+		#curRing.aim::after {
+			top: -10px; bottom: -10px; left: 50%;
+			width: 2px; margin-left: -1px;
+			background: linear-gradient(180deg, currentColor 8px, transparent 8px, transparent calc(100% - 8px), currentColor calc(100% - 8px));
+		}
+
 		.mono { font-family: 'JetBrains Mono', monospace; }
 
 		a { color: var(--accent); text-decoration: none; }
@@ -661,6 +706,16 @@
 		}
 		.project:hover .link { gap: 11px; color: var(--accent-2); }
 
+		/* 2x2 cover mosaic for the asset hub card */
+		.thumb.mosaic {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			gap: 3px;
+			background: #04070f;
+		}
+		.thumb.mosaic img { width: 100%; height: 100%; object-fit: cover; }
+
 		/* terminal-style thumb for toolkit card */
 		.thumb.term {
 			background: #04070f;
@@ -851,6 +906,8 @@
 <body>
 
 	<canvas id="stars"></canvas>
+	<div id="curRing"></div>
+	<div id="cur"></div>
 
 	<!-- ===== Nav ===== -->
 	<nav id="topnav">
@@ -988,7 +1045,7 @@
 						Hover to stop the conveyor — click any pack to grab it.
 					</p>
 				</div>
-				<a class="btn primary reveal d3" href="https://rehandev.itch.io/" target="_blank" rel="noopener">Browse all on itch.io →</a>
+				<a class="btn primary reveal d3" href="/packs/">Open the Asset Hub →</a>
 			</div>
 
 			<div class="marquee reveal">
@@ -1044,7 +1101,21 @@
 						<span class="link">Get it on itch.io →</span>
 					</div>
 				</a>
-				<a class="project reveal d2" href="/toolkit/">
+				<a class="project reveal d2" href="/packs/">
+					<div class="thumb mosaic">
+						<span class="badge">ASSET HUB</span>
+						<img src="https://img.itch.zone/aW1nLzI3NzczMzQxLmpwZw==/original/GP8h4j.jpg" alt="1500+ spaceships pack cover" />
+						<img src="https://img.itch.zone/aW1nLzI3NzA3NTU5LmpwZw==/original/ed%2BqQ0.jpg" alt="1100+ military pack cover" />
+						<img src="https://img.itch.zone/aW1nLzI3MjA0MDUxLnBuZw==/original/tAk26b.png" alt="480+ furniture pack cover" />
+						<img src="https://img.itch.zone/aW1nLzI4MDUwMDIyLmpwZw==/original/%2FAKJv5.jpg" alt="370+ pixel houses pack cover" />
+					</div>
+					<div class="body">
+						<h3>Asset Packs Hub</h3>
+						<p>The whole hangar in one place — 26 packs, 9,500+ pixel sprites and 3D models. Browse by category and grab any pack straight from itch.io.</p>
+						<span class="link">Enter the hub →</span>
+					</div>
+				</a>
+				<a class="project reveal d3" href="/toolkit/">
 					<div class="thumb term">
 						<span class="badge wip">IN DEVELOPMENT</span>
 						<span class="dim">$</span> install itch-toolkit<br />
@@ -1669,6 +1740,39 @@
 		document.querySelectorAll('[data-dup]').forEach(function (track) {
 			track.innerHTML += track.innerHTML;
 		});
+
+		/* =========================================================
+		   Custom cursor (dot + trailing ring, crosshair in hero)
+		   ========================================================= */
+		if (fine && !reduceMotion) {
+			var cur = document.getElementById('cur');
+			var curRing = document.getElementById('curRing');
+			var ccx = -100, ccy = -100, crx = -100, cry = -100;
+			document.body.classList.add('cursor-on');
+			document.addEventListener('mousemove', function (e) {
+				ccx = e.clientX; ccy = e.clientY;
+				cur.style.transform = 'translate(' + ccx + 'px,' + ccy + 'px)';
+				curRing.classList.toggle('aim', !!(e.target.closest && e.target.closest('#hero')) &&
+					!e.target.closest('a, button, input, textarea'));
+			});
+			(function follow() {
+				crx += (ccx - crx) * .18;
+				cry += (ccy - cry) * .18;
+				curRing.style.transform = 'translate(' + crx + 'px,' + cry + 'px)';
+				requestAnimationFrame(follow);
+			})();
+			document.addEventListener('mouseover', function (e) {
+				curRing.classList.toggle('hov', !!e.target.closest('a, button, input, textarea, label'));
+			});
+			document.addEventListener('mousedown', function () { curRing.classList.add('down'); });
+			document.addEventListener('mouseup', function () { curRing.classList.remove('down'); });
+			document.documentElement.addEventListener('mouseleave', function () {
+				cur.style.opacity = curRing.style.opacity = '0';
+			});
+			document.documentElement.addEventListener('mouseenter', function () {
+				cur.style.opacity = curRing.style.opacity = '';
+			});
+		}
 
 		/* =========================================================
 		   Title easter egg on tab switch

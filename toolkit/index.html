@@ -49,6 +49,36 @@
 
 		canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
+		/* ---------- custom cursor ---------- */
+		#cur, #curRing {
+			position: fixed; top: 0; left: 0;
+			z-index: 999;
+			pointer-events: none;
+			opacity: 0;
+			transition: opacity .25s;
+		}
+		body.cursor-on #cur, body.cursor-on #curRing { opacity: 1; }
+		body.cursor-on, body.cursor-on * { cursor: none !important; }
+		#cur {
+			width: 8px; height: 8px;
+			margin: -4px 0 0 -4px;
+			background: var(--accent);
+			border-radius: 50%;
+			box-shadow: 0 0 10px var(--accent);
+		}
+		#curRing {
+			width: 34px; height: 34px;
+			margin: -17px 0 0 -17px;
+			border: 1.5px solid rgba(45, 212, 191, .65);
+			border-radius: 50%;
+			transition: width .2s, height .2s, margin .2s, border-color .2s, opacity .25s;
+		}
+		#curRing.hov {
+			width: 54px; height: 54px;
+			margin: -27px 0 0 -27px;
+			border-color: var(--accent-2);
+		}
+
 		.terminal {
 			position: relative;
 			z-index: 1;
@@ -187,6 +217,8 @@
 </head>
 <body>
 	<canvas id="stars"></canvas>
+	<div id="curRing"></div>
+	<div id="cur"></div>
 
 	<div class="terminal">
 		<div class="term-bar">
@@ -299,6 +331,33 @@
 			requestAnimationFrame(step);
 		}
 		if (reduceMotion) grow();
+
+		/* custom cursor */
+		if (window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
+			var cur = document.getElementById('cur');
+			var ring = document.getElementById('curRing');
+			var cx = -100, cy = -100, rx = -100, ry = -100;
+			document.body.classList.add('cursor-on');
+			document.addEventListener('mousemove', function (e) {
+				cx = e.clientX; cy = e.clientY;
+				cur.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
+			});
+			(function follow() {
+				rx += (cx - rx) * .18;
+				ry += (cy - ry) * .18;
+				ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
+				requestAnimationFrame(follow);
+			})();
+			document.addEventListener('mouseover', function (e) {
+				ring.classList.toggle('hov', !!e.target.closest('a, button'));
+			});
+			document.documentElement.addEventListener('mouseleave', function () {
+				cur.style.opacity = ring.style.opacity = '0';
+			});
+			document.documentElement.addEventListener('mouseenter', function () {
+				cur.style.opacity = ring.style.opacity = '';
+			});
+		}
 	})();
 	</script>
 </body>

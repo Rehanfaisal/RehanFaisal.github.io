@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VVY3N3JDCJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-VVY3N3JDCJ');
+	</script>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Asset Hub — RehanDev</title>
+	<meta name="description" content="All of RehanDev's 2D pixel and 3D low-poly asset packs in one place — 9,500+ sprites and models, free / pay-what-you-want on itch.io." />
+	<link rel="icon" href="/images/Logo.png" type="image/png" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+	<style>
+		:root {
+			--bg: #070b14;
+			--card: rgba(18, 28, 48, .6);
+			--card-border: rgba(94, 234, 212, .12);
+			--text: #e6edf7;
+			--muted: #94a3b8;
+			--accent: #2dd4bf;
+			--accent-2: #38bdf8;
+			--accent-3: #a78bfa;
+			--glow: rgba(45, 212, 191, .35);
+			--radius: 16px;
+			--pixel: 'Press Start 2P', monospace;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body {
+			background: var(--bg);
+			color: var(--text);
+			font-family: 'Space Grotesk', system-ui, sans-serif;
+			line-height: 1.6;
+			overflow-x: hidden;
+		}
+		::selection { background: var(--accent); color: #06251f; }
+		a { color: var(--accent); text-decoration: none; }
+		img { max-width: 100%; display: block; }
+
+		canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+		/* ---------- custom cursor ---------- */
+		#cur, #curRing {
+			position: fixed; top: 0; left: 0;
+			z-index: 999;
+			pointer-events: none;
+			opacity: 0;
+			transition: opacity .25s;
+		}
+		body.cursor-on #cur, body.cursor-on #curRing { opacity: 1; }
+		body.cursor-on, body.cursor-on * { cursor: none !important; }
+		#cur {
+			width: 8px; height: 8px;
+			margin: -4px 0 0 -4px;
+			background: var(--accent);
+			border-radius: 50%;
+			box-shadow: 0 0 10px var(--accent);
+		}
+		#curRing {
+			width: 34px; height: 34px;
+			margin: -17px 0 0 -17px;
+			border: 1.5px solid rgba(45, 212, 191, .65);
+			border-radius: 50%;
+			transition: width .2s, height .2s, margin .2s, border-color .2s, opacity .25s, transform .1s;
+		}
+		#curRing.hov {
+			width: 54px; height: 54px;
+			margin: -27px 0 0 -27px;
+			border-color: var(--accent-2);
+		}
+		#curRing.down { transform: scale(.75); }
+
+		/* ---------- header ---------- */
+		header {
+			position: relative;
+			z-index: 1;
+			max-width: 1150px;
+			margin: 0 auto;
+			padding: 36px 5vw 10px;
+		}
+		.back {
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .85rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			margin-bottom: 30px;
+		}
+		.back:hover { color: var(--accent-2); }
+		.kicker {
+			font-family: var(--pixel);
+			color: var(--accent);
+			font-size: .62rem;
+			letter-spacing: 1px;
+			display: block;
+			margin-bottom: 14px;
+		}
+		.kicker::before { content: '▸ '; color: var(--accent-3); }
+		h1 {
+			font-size: clamp(2rem, 5vw, 3.2rem);
+			line-height: 1.15;
+			margin-bottom: 14px;
+		}
+		.grad {
+			background: linear-gradient(92deg, var(--accent), var(--accent-2) 55%, var(--accent-3));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+		.sub { color: var(--muted); max-width: 640px; }
+		.hub-stats {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 26px;
+			margin-top: 24px;
+			font-family: var(--pixel);
+			font-size: .56rem;
+			color: var(--muted);
+			line-height: 2;
+		}
+		.hub-stats b { color: var(--accent); display: block; font-size: 1rem; font-weight: 400; }
+
+		/* ---------- filters ---------- */
+		.filters {
+			position: relative;
+			z-index: 1;
+			max-width: 1150px;
+			margin: 30px auto 0;
+			padding: 0 5vw;
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+		.fbtn {
+			font-family: var(--pixel);
+			font-size: .55rem;
+			letter-spacing: 1px;
+			color: var(--muted);
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: 10px;
+			padding: 12px 18px;
+			cursor: pointer;
+			transition: color .2s, border-color .2s, background .2s, transform .2s;
+		}
+		.fbtn:hover { transform: translateY(-2px); color: var(--text); }
+		.fbtn.on {
+			color: #06251f;
+			background: var(--accent);
+			border-color: var(--accent);
+			box-shadow: 0 0 16px var(--glow);
+		}
+
+		/* ---------- grid ---------- */
+		.grid {
+			position: relative;
+			z-index: 1;
+			max-width: 1150px;
+			margin: 30px auto 0;
+			padding: 0 5vw 20px;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+			gap: 20px;
+		}
+		.pk {
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: var(--radius);
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			color: var(--text);
+			transition: transform .3s, border-color .3s, box-shadow .3s, opacity .3s;
+			animation: pop .45s ease both;
+		}
+		@keyframes pop { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+		.pk:hover {
+			transform: translateY(-6px);
+			border-color: rgba(45, 212, 191, .5);
+			box-shadow: 0 18px 44px rgba(0,0,0,.5), 0 0 18px rgba(45, 212, 191, .12);
+			color: var(--text);
+		}
+		.pk .im {
+			aspect-ratio: 315 / 250;
+			overflow: hidden;
+			position: relative;
+			background: linear-gradient(135deg, #101a2e, #0a1122);
+		}
+		.pk .im img {
+			width: 100%; height: 100%;
+			object-fit: cover;
+			transition: transform .45s ease;
+			image-rendering: auto;
+		}
+		.pk:hover .im img { transform: scale(1.07); }
+		.pk .im .ph {
+			position: absolute;
+			inset: 0;
+			display: none;
+			place-items: center;
+			font-family: var(--pixel);
+			font-size: 1.1rem;
+			color: var(--accent);
+			text-shadow: 0 0 18px var(--glow);
+		}
+		.pk .im.noimg img { display: none; }
+		.pk .im.noimg .ph { display: grid; }
+		.pk .cat {
+			position: absolute;
+			top: 10px; left: 10px;
+			z-index: 2;
+			font-family: var(--pixel);
+			font-size: .48rem;
+			letter-spacing: 1px;
+			padding: 5px 9px;
+			border-radius: 6px;
+			color: #06251f;
+			background: var(--accent);
+		}
+		.pk .cat.c3d { background: var(--accent-3); color: #1e1038; }
+		.pk .bd { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+		.pk h3 { font-size: 1rem; line-height: 1.35; font-weight: 600; }
+		.pk h3 .n { color: var(--accent); }
+		.pk .foot {
+			margin-top: auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: .72rem;
+			color: var(--muted);
+		}
+		.pk .foot .go { color: var(--accent); font-weight: 600; transition: color .2s; }
+		.pk:hover .foot .go { color: var(--accent-2); }
+		.pk .foot .pwyw {
+			border: 1px solid rgba(56, 189, 248, .3);
+			color: var(--accent-2);
+			padding: 2px 8px;
+			border-radius: 99px;
+			font-size: .62rem;
+		}
+
+		/* ---------- footer ---------- */
+		.hub-foot {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			padding: 40px 5vw 46px;
+			color: var(--muted);
+			font-size: .88rem;
+		}
+		.hub-foot .btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 13px 26px;
+			border-radius: 12px;
+			font-weight: 600;
+			background: linear-gradient(92deg, var(--accent), var(--accent-2));
+			color: #06251f;
+			box-shadow: 0 4px 24px var(--glow);
+			transition: transform .18s;
+			margin-bottom: 16px;
+		}
+		.hub-foot .btn:hover { transform: translateY(-2px); }
+		.hub-foot .pix {
+			font-family: var(--pixel);
+			font-size: .5rem;
+			color: rgba(148, 163, 184, .5);
+			margin-top: 14px;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<canvas id="stars"></canvas>
+	<div id="curRing"></div>
+	<div id="cur"></div>
+
+	<header>
+		<a class="back" href="/">← back to rehandev.xyz</a>
+		<span class="kicker">ASSET HUB — REHANDEV</span>
+		<h1>Every pack, <span class="grad">one hangar.</span></h1>
+		<p class="sub">
+			All my 2D pixel and 3D low-poly asset packs — made with an AI-assisted pipeline, then cleaned,
+			palette-mapped and batch-processed with my own tools. Click any pack to grab it on itch.io.
+			Almost everything is free / pay-what-you-want.
+		</p>
+		<div class="hub-stats">
+			<span><b id="stPacks">26</b>PACKS</span>
+			<span><b>9,500+</b>SPRITES &amp; MODELS</span>
+			<span><b>FREE</b>/ PAY-WHAT-YOU-WANT</span>
+		</div>
+	</header>
+
+	<div class="filters" id="filters">
+		<button class="fbtn on" data-f="all">ALL PACKS</button>
+		<button class="fbtn" data-f="2d">2D PIXEL</button>
+		<button class="fbtn" data-f="3d">3D MODELS</button>
+	</div>
+
+	<div class="grid" id="grid"></div>
+
+	<div class="hub-foot">
+		<a class="btn" href="https://rehandev.itch.io/" target="_blank" rel="noopener">Follow me on itch.io for new packs →</a>
+		<p>New packs land regularly — following on itch.io pings you the moment the forge fires.</p>
+		<p class="pix">// FORGED BY REHANDEV — POWERED BY PIXELS</p>
+	</div>
+
+	<script>
+	(function () {
+		'use strict';
+		var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		/* ---------- data ---------- */
+		var IZ = 'https://img.itch.zone/';
+		var IT = 'https://rehandev.itch.io/';
+		var packs = [
+			{ n: '1500+', t: 'Spaceships, Asteroids & Space Junk — 4 in 1', c: '2d', u: '1500-spaceships-asteroids-and-space-junks', i: 'aW1nLzI3NzczMzQxLmpwZw==/original/GP8h4j.jpg' },
+			{ n: '1100+', t: 'Military Vehicles, Guns & Turrets — 4 in 1', c: '2d', u: '1100-military-pack-4-in-1-pack', i: 'aW1nLzI3NzA3NTU5LmpwZw==/original/ed%2BqQ0.jpg' },
+			{ n: '590+', t: 'Cargo, Tech & Laboratory Loot', c: '2d', u: '590-pixel-cargo-tech-laboratory-loot', i: 'aW1nLzI3ODM0NzYwLmpwZw==/original/IAqgRQ.jpg' },
+			{ n: '500+', t: 'Deadly Traps + Batch Color Replacer', c: '2d', u: '500-pixel-deadly-trap-free-batch-color-replacing-software', i: 'aW1nLzI2NzMzNjI4LmpwZw==/original/1HgQQk.jpg' },
+			{ n: '500+', t: 'Deadly Traps + Color Replacer (Classic)', c: '2d', u: '500-deadly-traps-batch-color-replacer-software', i: 'aW1nLzI2NDczODYzLnBuZw==/original/iLRfHx.png' },
+			{ n: '480+', t: 'Top-Down Spaceships', c: '2d', u: '480-spaceships-topdown-pixel', i: 'aW1nLzI3MjQ1MDk2LnBuZw==/original/hEfeqD.png' },
+			{ n: '480+', t: 'Furniture Pack — 6 Themes', c: '2d', u: '480-furniture-pack-modern-old-dungeon-futuristic-gaming-nature', i: 'aW1nLzI3MjA0MDUxLnBuZw==/original/tAk26b.png' },
+			{ n: '450+', t: 'Cars & Vehicles (Sci-fi to Vintage)', c: '2d', u: '450-pixel-car-pack', i: 'aW1nLzI3MjAzOTg1LnBuZw==/original/%2Ba2W8U.png' },
+			{ n: '450+', t: 'Dead Animals', c: '2d', u: '450-pixel-dead-animals', i: 'aW1nLzI4MDI2NzkyLmpwZw==/original/Wax7vR.jpg' },
+			{ n: '450+', t: 'Spaceships, Asteroids & More', c: '2d', u: '450-pixel-spaceship-asteroids-and-more', i: 'aW1nLzI3NzU0Mzc1LmpwZw==/original/CBuCL0.jpg' },
+			{ n: '400+', t: 'Underwater Loot & Junk', c: '2d', u: '400-underwater-loot-and-junk', i: 'aW1nLzI3OTg1NDE0LmpwZw==/original/W7IIIz.jpg' },
+			{ n: '370+', t: 'Pixel Houses — 5 Themes', c: '2d', u: '370-pixel-houses-scifi-post-apocalyptic-modern-farm-normal', i: 'aW1nLzI4MDUwMDIyLmpwZw==/original/%2FAKJv5.jpg' },
+			{ n: '350+', t: 'Guns Mega Pack', c: '2d', u: '350-guns-mega-pack', i: 'aW1nLzI3MTM3NTY2LnBuZw==/original/0TcwJ1.png' },
+			{ n: '340+', t: 'Bones & Skeletons', c: '2d', u: '340-pixel-bones-and-skeletons', i: 'aW1nLzI3OTkyMTY2LmpwZw==/original/Ia%2BI%2BW.jpg' },
+			{ n: '330+', t: 'Military Vehicles', c: '2d', u: '330pixel-military-vehicle', i: 'aW1nLzI3MzQxODE5LnBuZw==/original/h8LrJk.png' },
+			{ n: '320+', t: 'Turrets Mega Pack', c: '2d', u: '320-turrets-mega-pixel-pack', i: 'aW1nLzI3MzAzNzgzLnBuZw==/original/%2BA4dHR.png' },
+			{ n: '300+', t: 'Asteroids & Space Junk', c: '2d', u: '300-asteroid-and-space-junk-pixel', i: 'aW1nLzI3MjI3NjI1LnBuZw==/original/RM9Ybm.png' },
+			{ n: '280+', t: 'Mega Space Ship Pack 2D', c: '2d', u: '280-mega-pixel-space-ship-pack-2d', i: 'aW1nLzI3MTM3NTU3LnBuZw==/original/sVKdsD.png' },
+			{ n: '210+', t: 'Pixel Paintings', c: '2d', u: '210-pixel-paintings', i: 'aW1nLzI4MDc4MjM2LmpwZw==/original/dSfSrm.jpg' },
+			{ n: '100+', t: 'Pink Pixel Weapons Pack', c: '2d', u: '100-pink-pixel-weapons-pack', i: 'aW1nLzI3Njk4Njc2LnBuZw==/original/4I3ubo.png' },
+			{ n: '250+', t: 'Ultimate Barriers & Fences Pack', c: '3d', u: 'ultimate-3d-barrier-and-fences-pack', i: 'aW1nLzE4MTMzNjEzLmpwZw==/original/4MNlqu.jpg' },
+			{ n: '3×', t: 'Spaceships Low-Poly Pack', c: '3d', u: '3-spaceships-3d-low-poly-pack', i: 'aW1nLzI3MDUxNzc2LmpwZw==/original/B8Fkgv.jpg' },
+			{ n: 'FREE', t: 'Candy Car — Low Poly', c: '3d', u: 'free-3d-candy-car', i: 'aW1nLzI0MzQzMDMyLnBuZw==/original/Nt34iR.png' },
+			{ n: 'FREE', t: 'Low-Poly Spaceship (Multi-colour)', c: '3d', u: 'spaceship-design', i: 'aW1nLzE3NjkzNzc3LmpwZw==/original/4ku5bi.jpg' },
+			{ n: 'FREE', t: 'Low-Poly Spaceship Mk.II', c: '3d', u: 'low-poly-spaceship-3d-model', i: 'aW1nLzE4MTE5NzE1LmpwZw==/original/n7m2gi.jpg' },
+			{ n: 'FREE', t: 'Low-Poly Spaceship Mk.III', c: '3d', u: 'free-low-poly-spaceship-3d-model-3', i: 'aW1nLzE4NDUzODIzLmpwZw==/original/hF7BkB.jpg' }
+		];
+
+		/* ---------- render ---------- */
+		var grid = document.getElementById('grid');
+		document.getElementById('stPacks').textContent = packs.length;
+
+		function render(filter) {
+			grid.innerHTML = '';
+			packs.forEach(function (p, idx) {
+				if (filter !== 'all' && p.c !== filter) return;
+				var a = document.createElement('a');
+				a.className = 'pk';
+				a.href = IT + p.u;
+				a.target = '_blank';
+				a.rel = 'noopener';
+				a.style.animationDelay = Math.min(idx * .04, .5) + 's';
+				a.innerHTML =
+					'<div class="im">' +
+						'<span class="cat' + (p.c === '3d' ? ' c3d' : '') + '">' + p.c.toUpperCase() + '</span>' +
+						'<img data-src="' + IZ + p.i + '" alt="' + p.t.replace(/"/g, '&quot;') + ' — pixel asset pack cover" ' +
+							'onerror="this.parentNode.classList.add(\'noimg\')" />' +
+						'<span class="ph">' + p.n + '</span>' +
+					'</div>' +
+					'<div class="bd">' +
+						'<h3><span class="n">' + p.n + '</span> ' + p.t + '</h3>' +
+						'<div class="foot"><span class="pwyw">FREE / PWYW</span><span class="go">itch.io →</span></div>' +
+					'</div>';
+				grid.appendChild(a);
+			});
+			lazyLoad();
+		}
+
+		/* IntersectionObserver-based lazy loading (native loading=lazy
+		   is unreliable in some embedded browsers) */
+		var lazyObs = ('IntersectionObserver' in window)
+			? new IntersectionObserver(function (entries) {
+				entries.forEach(function (en) {
+					if (en.isIntersecting) {
+						var im = en.target;
+						im.src = im.getAttribute('data-src');
+						im.removeAttribute('data-src');
+						lazyObs.unobserve(im);
+					}
+				});
+			}, { rootMargin: '900px 0px' })
+			: null;
+		function lazyLoad() {
+			document.querySelectorAll('img[data-src]').forEach(function (im, idx) {
+				// first rows load eagerly; rest wait for scroll
+				if (lazyObs && idx > 8) { lazyObs.observe(im); }
+				else { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }
+			});
+		}
+
+		render('all');
+
+		document.getElementById('filters').addEventListener('click', function (e) {
+			var b = e.target.closest('.fbtn');
+			if (!b) return;
+			document.querySelectorAll('.fbtn').forEach(function (x) { x.classList.remove('on'); });
+			b.classList.add('on');
+			render(b.getAttribute('data-f'));
+		});
+
+		/* ---------- starfield ---------- */
+		var canvas = document.getElementById('stars');
+		var ctx = canvas.getContext('2d');
+		var stars = [], W, H;
+		function resize() {
+			W = canvas.width = innerWidth;
+			H = canvas.height = innerHeight;
+			stars = [];
+			for (var i = 0; i < Math.min(180, W * H / 11000); i++) {
+				stars.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.3 + .3, tw: Math.random() * 6, sp: Math.random() * .05 + .01 });
+			}
+		}
+		function draw() {
+			ctx.clearRect(0, 0, W, H);
+			for (var i = 0; i < stars.length; i++) {
+				var s = stars[i];
+				s.tw += s.sp;
+				ctx.beginPath();
+				ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+				ctx.fillStyle = 'rgba(180,225,255,' + (.3 + Math.abs(Math.sin(s.tw)) * .6).toFixed(2) + ')';
+				ctx.fill();
+			}
+			if (!reduceMotion) requestAnimationFrame(draw);
+		}
+		addEventListener('resize', resize);
+		resize();
+		draw();
+
+		/* ---------- custom cursor ---------- */
+		if (window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
+			var cur = document.getElementById('cur');
+			var ring = document.getElementById('curRing');
+			var cx = -100, cy = -100, rx = -100, ry = -100;
+			document.body.classList.add('cursor-on');
+			document.addEventListener('mousemove', function (e) {
+				cx = e.clientX; cy = e.clientY;
+				cur.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
+			});
+			(function follow() {
+				rx += (cx - rx) * .18;
+				ry += (cy - ry) * .18;
+				ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)' + (ring.classList.contains('down') ? ' scale(.75)' : '');
+				requestAnimationFrame(follow);
+			})();
+			document.addEventListener('mouseover', function (e) {
+				ring.classList.toggle('hov', !!e.target.closest('a, button, input, textarea, label'));
+			});
+			document.addEventListener('mousedown', function () { ring.classList.add('down'); });
+			document.addEventListener('mouseup', function () { ring.classList.remove('down'); });
+			document.documentElement.addEventListener('mouseleave', function () {
+				cur.style.opacity = ring.style.opacity = '0';
+			});
+			document.documentElement.addEventListener('mouseenter', function () {
+				cur.style.opacity = ring.style.opacity = '';
+			});
+		}
+	})();
+	</script>
+</body>
+</html>
