@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VVY3N3JDCJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-VVY3N3JDCJ');
+	</script>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Pricing — Itch Toolkit</title>
+	<meta name="description" content="Itch Toolkit pricing — free core dashboard, Pro for $4.99/month. Analytics, alerts, tag research, widgets and page styling for itch.io creators." />
+	<link rel="icon" href="/images/Logo.png" type="image/png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #070b14; --text: #e6edf7; --muted: #94a3b8;
+			--accent: #2dd4bf; --accent-2: #38bdf8; --accent-3: #a78bfa;
+			--card: rgba(18, 28, 48, .6); --border: rgba(94, 234, 212, .18);
+			--pixel: 'Press Start 2P', monospace;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', system-ui, sans-serif; line-height: 1.7; padding: 40px 20px 60px; }
+		::selection { background: var(--accent); color: #06251f; }
+		a { color: var(--accent); text-decoration: none; }
+		a:hover { color: var(--accent-2); }
+		.wrap { max-width: 860px; margin: 0 auto; }
+		.crumb { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--muted); margin-bottom: 26px; display: block; }
+		h1 { font-family: var(--pixel); font-size: clamp(1rem, 3.4vw, 1.6rem); line-height: 1.8; margin-bottom: 6px; }
+		h1 .grad { background: linear-gradient(92deg, var(--accent), var(--accent-2), var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+		.sub { color: var(--muted); margin-bottom: 36px; }
+		.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 40px; }
+		@media (max-width: 700px) { .plans { grid-template-columns: 1fr; } }
+		.plan { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 26px; }
+		.plan.pro { border-color: var(--accent); box-shadow: 0 0 34px rgba(45, 212, 191, .12); position: relative; }
+		.plan .tag { font-family: var(--pixel); font-size: .55rem; letter-spacing: 2px; color: var(--muted); }
+		.plan.pro .tag { color: var(--accent); }
+		.plan .price { font-size: 2.1rem; font-weight: 700; margin: 10px 0 2px; }
+		.plan .price span { font-size: .95rem; font-weight: 400; color: var(--muted); }
+		.plan ul { list-style: none; margin-top: 18px; }
+		.plan li { padding: 7px 0 7px 26px; position: relative; font-size: .93rem; border-bottom: 1px solid rgba(148,163,184,.08); }
+		.plan li:last-child { border-bottom: none; }
+		.plan li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+		.plan li.no::before { content: "—"; color: var(--muted); }
+		.plan li.no { color: var(--muted); }
+		.cta { display: inline-block; margin-top: 20px; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: .9rem; }
+		.cta.pro { background: linear-gradient(92deg, var(--accent), var(--accent-2)); color: #06251f; }
+		.cta.soon { border: 1px dashed rgba(148,163,184,.4); color: var(--muted); cursor: default; }
+		.note { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; font-size: .88rem; color: var(--muted); margin-bottom: 40px; }
+		.note b { color: var(--text); }
+		h2 { font-size: 1.15rem; margin: 28px 0 10px; }
+		.faq p { color: var(--muted); font-size: .92rem; margin-bottom: 16px; }
+		.faq b { color: var(--text); display: block; margin-bottom: 2px; }
+		.legal-row { margin-top: 46px; padding-top: 16px; border-top: 1px solid rgba(148,163,184,.15); font-size: .78rem; color: var(--muted); }
+		.legal-row a { color: var(--muted); }
+		.legal-row a:hover { color: var(--accent); }
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<a class="crumb" href="/toolkit/">← rehan@dev: ~/itch-toolkit</a>
+		<h1>ITCH <span class="grad">TOOLKIT</span> PRICING</h1>
+		<p class="sub">One extension, two tiers. Start free, upgrade when it pays for itself.</p>
+
+		<div class="plans">
+			<div class="plan">
+				<span class="tag">FREE</span>
+				<div class="price">$0 <span>forever</span></div>
+				<ul>
+					<li>Full analytics dashboard — views, downloads, sales, custom date ranges, interactive charts</li>
+					<li>Conversion funnel, traffic sources &amp; portfolio leaderboard</li>
+					<li>Core widgets (game embed, spoiler, columns)</li>
+					<li>GIF Studio editor — compose &amp; preview freely</li>
+					<li>CSS theme designer — full live preview</li>
+					<li>Watchlist (up to 3 games)</li>
+					<li class="no">Download alerts, sale alerts &amp; weekly recap</li>
+					<li class="no">Search-indexing monitoring</li>
+					<li class="no">Tag research &amp; opportunity finder</li>
+				</ul>
+				<span class="cta soon">Included with the extension</span>
+			</div>
+			<div class="plan pro">
+				<span class="tag">★ PRO</span>
+				<div class="price">$4.99 <span>/ month</span></div>
+				<ul>
+					<li><b>Everything in Free</b>, plus:</li>
+					<li>Download, sale &amp; rating alerts + weekly recap</li>
+					<li>Search-indexing monitoring &amp; de-index warnings</li>
+					<li>Tag research: competition, co-occurrence &amp; opportunity scores</li>
+					<li>AI title &amp; tagline suggestions on edit pages</li>
+					<li>All premium widgets with copyable HTML</li>
+					<li>Copyable page-theme CSS (17 themes + full editor)</li>
+					<li>GIF export &amp; unlimited watchlist</li>
+					<li>Cloud sync across devices</li>
+				</ul>
+				<span class="cta soon">Coming soon — launching with the extension</span>
+			</div>
+		</div>
+
+		<div class="note">
+			<b>Billing:</b> Pro subscriptions are processed securely by <b>Paddle.com</b>, our merchant of record —
+			they handle checkout, invoicing and applicable tax. Cancel anytime from your account; you keep Pro until the
+			end of the paid period. First-time purchases are covered by our <a href="/toolkit/refunds/">14-day refund policy</a>.
+		</div>
+
+		<h2>FAQ</h2>
+		<div class="faq">
+			<p><b>Can I cancel anytime?</b> Yes — one click, no questions. Your Pro features stay active until the period you paid for ends.</p>
+			<p><b>Do I need Pro to use the extension?</b> No. The analytics dashboard — the core of the toolkit — is completely free.</p>
+			<p><b>Is this affiliated with itch.io?</b> No. Itch Toolkit is an independent tool built by a fellow itch.io creator and is not endorsed by or affiliated with itch corp.</p>
+			<p><b>What payment methods are supported?</b> Everything Paddle supports: major cards, PayPal, Apple Pay and Google Pay (varies by region).</p>
+		</div>
+
+		<div class="legal-row">
+			<a href="/toolkit/">Itch Toolkit</a> ·
+			<a href="/toolkit/pricing/">Pricing</a> ·
+			<a href="/toolkit/terms/">Terms of Service</a> ·
+			<a href="/toolkit/privacy/">Privacy Policy</a> ·
+			<a href="/toolkit/refunds/">Refund Policy</a> ·
+			<a href="/">rehandev.xyz</a>
+		</div>
+	</div>
+</body>
+</html>

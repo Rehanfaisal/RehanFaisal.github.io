@@ -391,16 +391,18 @@
 			z-index: 2;
 		}
 		.ship-wrap.boost { animation: boost .5s ease; }
-		.ship-wrap img {
+		.ship-wrap #ship {
 			width: min(280px, 62vw);
 			max-width: 280px;
+			height: auto;
+			display: block;
 			filter: drop-shadow(0 20px 40px rgba(45, 212, 191, .25));
 			user-select: none;
 			-webkit-user-drag: none;
 			transition: filter .2s;
 			will-change: transform;
 		}
-		.ship-wrap.firing img { filter: drop-shadow(0 0 26px rgba(45, 212, 191, .8)); }
+		.ship-wrap.firing #ship { filter: drop-shadow(0 0 26px rgba(45, 212, 191, .8)); }
 		@keyframes bob {
 			0%, 100% { transform: translateY(0); }
 			50% { transform: translateY(-16px); }
@@ -437,7 +439,7 @@
 			.hero-desc { margin-inline: auto; }
 			.btn-row { justify-content: center; }
 			.hero-ship { order: -1; min-height: 220px; }
-			.ship-wrap img { width: 180px; }
+			.ship-wrap #ship { width: 180px; }
 			.ship-ring { width: 240px; }
 			.hud { top: 84px; right: 4vw; }
 		}
@@ -912,7 +914,7 @@
 	<!-- ===== Nav ===== -->
 	<nav id="topnav">
 		<a class="brand" href="#hero">
-			<img src="images/Logo.png" alt="Rehan Faisal logo" />
+			<img src="images/Ship1.gif" alt="Rotating low-poly spaceship logo" />
 			REHAN<span class="dot">.DEV</span>
 		</a>
 		<button id="hamburger" aria-label="Toggle menu">☰</button>
@@ -955,7 +957,61 @@
 				<div class="hero-ship reveal d2">
 					<div class="ship-ring"></div>
 					<div class="ship-wrap">
-						<img id="ship" src="images/Ship1.gif" alt="Low-poly spaceship from DASH//BLAST" />
+						<!-- Custom up-facing fighter: the aim code adds +90°, so a nose-up ship
+						     tracks the cursor exactly (the old GIF spun on its own and fought it). -->
+						<svg id="ship" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Low-poly spaceship from DASH//BLAST">
+							<defs>
+								<linearGradient id="shipHull" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="0" stop-color="#5eead4"/>
+									<stop offset=".55" stop-color="#2dd4bf"/>
+									<stop offset="1" stop-color="#0e7490"/>
+								</linearGradient>
+								<linearGradient id="shipWing" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="0" stop-color="#38bdf8"/>
+									<stop offset="1" stop-color="#1e3a8a"/>
+								</linearGradient>
+								<linearGradient id="shipFlame" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="0" stop-color="#ffffff"/>
+									<stop offset=".4" stop-color="#5eead4"/>
+									<stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+								</linearGradient>
+							</defs>
+							<!-- engine flames (flicker via scale, anchored at the nozzles) -->
+							<g transform="translate(82,182)">
+								<polygon points="-8,0 8,0 0,44" fill="url(#shipFlame)">
+									<animateTransform attributeName="transform" type="scale" values="1 1;1 1.45;1 .8;1 1.2;1 1" dur=".45s" repeatCount="indefinite"/>
+								</polygon>
+							</g>
+							<g transform="translate(118,182)">
+								<polygon points="-8,0 8,0 0,44" fill="url(#shipFlame)">
+									<animateTransform attributeName="transform" type="scale" values="1 1.2;1 .85;1 1.4;1 1;1 1.2" dur=".5s" repeatCount="indefinite"/>
+								</polygon>
+							</g>
+							<!-- wings -->
+							<polygon points="126,92 178,180 138,168 128,138" fill="url(#shipWing)" stroke="#0c1322" stroke-width="3" stroke-linejoin="round"/>
+							<polygon points="74,92 22,180 62,168 72,138" fill="url(#shipWing)" stroke="#0c1322" stroke-width="3" stroke-linejoin="round"/>
+							<!-- wing tips -->
+							<polygon points="178,180 186,196 162,190 158,174" fill="#a78bfa" stroke="#0c1322" stroke-width="3" stroke-linejoin="round"/>
+							<polygon points="22,180 14,196 38,190 42,174" fill="#a78bfa" stroke="#0c1322" stroke-width="3" stroke-linejoin="round"/>
+							<!-- main hull -->
+							<polygon points="100,6 130,86 136,166 100,148 64,166 70,86" fill="url(#shipHull)" stroke="#0c1322" stroke-width="4" stroke-linejoin="round"/>
+							<!-- hull shading facet -->
+							<polygon points="100,6 130,86 136,166 100,148" fill="#0c1322" opacity=".18"/>
+							<!-- center fin -->
+							<polygon points="100,142 114,172 100,196 86,172" fill="#a78bfa" stroke="#0c1322" stroke-width="3.5" stroke-linejoin="round"/>
+							<!-- engine nozzles -->
+							<rect x="72" y="168" width="20" height="14" rx="3" fill="#0c1322"/>
+							<rect x="108" y="168" width="20" height="14" rx="3" fill="#0c1322"/>
+							<!-- cockpit -->
+							<polygon points="100,44 114,88 100,110 86,88" fill="#0c1322" stroke="#5eead4" stroke-width="2.5" stroke-linejoin="round"/>
+							<polygon points="100,52 108,84 100,98 92,84" fill="#38bdf8" opacity=".8">
+								<animate attributeName="opacity" values=".8;.45;.8" dur="2.4s" repeatCount="indefinite"/>
+							</polygon>
+							<!-- nose light -->
+							<circle cx="100" cy="16" r="4" fill="#ffffff">
+								<animate attributeName="opacity" values="1;.3;1" dur="1.2s" repeatCount="indefinite"/>
+							</circle>
+						</svg>
 					</div>
 					<span class="ship-hint">// ASTEROIDS INCOMING — CLICK TO SHOOT</span>
 				</div>

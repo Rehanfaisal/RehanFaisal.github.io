@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Privacy Policy — Itch Toolkit</title>
+	<meta name="description" content="Privacy Policy for the Itch Toolkit browser extension by RehanDev — what we collect, what stays local, and your rights." />
+	<link rel="icon" href="/images/Logo.png" type="image/png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+	<style>
+		:root { --bg:#070b14; --text:#e6edf7; --muted:#94a3b8; --accent:#2dd4bf; --accent-2:#38bdf8; --card:rgba(18,28,48,.6); --border:rgba(94,234,212,.18); }
+		* { margin:0; padding:0; box-sizing:border-box; }
+		body { background:var(--bg); color:var(--text); font-family:'Space Grotesk',system-ui,sans-serif; line-height:1.75; padding:40px 20px 60px; }
+		::selection { background:var(--accent); color:#06251f; }
+		a { color:var(--accent); text-decoration:none; } a:hover { color:var(--accent-2); }
+		.wrap { max-width:760px; margin:0 auto; }
+		.crumb { font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--muted); margin-bottom:26px; display:block; }
+		h1 { font-size:1.7rem; margin-bottom:4px; }
+		.updated { color:var(--muted); font-size:.85rem; margin-bottom:30px; }
+		h2 { font-size:1.1rem; margin:28px 0 8px; color:var(--accent); }
+		p, li { color:#c7d0dd; font-size:.94rem; margin-bottom:12px; }
+		ul { padding-left:22px; margin-bottom:12px; }
+		li { margin-bottom:6px; }
+		.hl { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 18px; margin-bottom:16px; }
+		table { width:100%; border-collapse:collapse; margin:10px 0 16px; font-size:.88rem; }
+		th, td { text-align:left; padding:8px 10px; border:1px solid rgba(148,163,184,.2); color:#c7d0dd; vertical-align:top; }
+		th { color:var(--text); background:rgba(148,163,184,.08); }
+		.legal-row { margin-top:46px; padding-top:16px; border-top:1px solid rgba(148,163,184,.15); font-size:.78rem; color:var(--muted); }
+		.legal-row a { color:var(--muted); } .legal-row a:hover { color:var(--accent); }
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<a class="crumb" href="/toolkit/">← rehan@dev: ~/itch-toolkit</a>
+		<h1>Privacy Policy</h1>
+		<p class="updated">Last updated: July 4, 2026</p>
+
+		<div class="hl">
+			<p style="margin:0;"><b>The short version:</b> your itch.io analytics data is processed <b>locally in your browser</b> and is not uploaded to our servers. We store only your account email and the small settings you choose to sync. We never sell data. Payments are handled by Paddle — we never see your card details.</p>
+		</div>
+
+		<h2>1. Who we are</h2>
+		<p>Itch Toolkit is operated by Rehan Faisal ("RehanDev"). Contact: <a href="mailto:rehanfaisal123@gmail.com">rehanfaisal123@gmail.com</a>. Itch Toolkit is not affiliated with itch corp / itch.io.</p>
+
+		<h2>2. What the extension processes, and where</h2>
+		<table>
+			<tr><th>Data</th><th>Where it lives</th><th>Purpose</th></tr>
+			<tr><td>Your itch.io dashboard data (views, downloads, sales, referrers, game pages)</td><td><b>Locally</b> in your browser's extension storage only</td><td>Rendering your analytics dashboard, alerts and research tools</td></tr>
+			<tr><td>Account email (and name/avatar if you sign in with Google)</td><td>Google Firebase (our auth provider)</td><td>Creating and securing your account</td></tr>
+			<tr><td>Synced settings: watchlist, favourite tags, alert preferences, API key</td><td>Google Firestore, tied to your account</td><td>Cloud sync across your devices</td></tr>
+			<tr><td>Subscription status (free/Pro)</td><td>Firestore + Paddle</td><td>Unlocking Pro features you paid for</td></tr>
+			<tr><td>Game title &amp; short description (only when you click the AI suggestion button)</td><td>Sent to Google's Gemini API for that request</td><td>Generating title/tagline suggestions you asked for</td></tr>
+			<tr><td>Payment &amp; billing details</td><td><b>Paddle.com</b> (merchant of record) — never on our systems</td><td>Processing subscriptions, invoices and tax</td></tr>
+			<tr><td>Basic website analytics (this site only)</td><td>Google Analytics</td><td>Understanding site traffic</td></tr>
+		</table>
+		<p>The extension requests permissions only for itch.io pages and the Google services listed above. It does not read your browsing history or activity on other websites.</p>
+
+		<h2>3. What we do NOT do</h2>
+		<ul>
+			<li>We do not sell, rent or trade your personal data. Ever.</li>
+			<li>We do not upload your itch.io analytics or revenue figures to our servers.</li>
+			<li>We do not read or store your itch.io password — the extension uses your existing logged-in session and your itch.io API key, which stays in your local extension storage (synced only if you enable cloud sync).</li>
+			<li>We do not use your data to train AI models.</li>
+		</ul>
+
+		<h2>4. Legal basis &amp; retention</h2>
+		<p>We process account data to provide the service you signed up for (performance of contract) and minimal analytics on this website based on legitimate interest. Account and sync data are kept while your account exists and deleted when you delete your account or on request. Local extension data is removed when you uninstall the extension or clear its storage.</p>
+
+		<h2>5. Your rights</h2>
+		<p>You can request access to, correction of, or deletion of your personal data at any time by emailing <a href="mailto:rehanfaisal123@gmail.com">rehanfaisal123@gmail.com</a> from your account email. Deleting your account removes your synced data from Firestore. Depending on where you live (e.g. EU/UK GDPR, California CCPA), you may have additional statutory rights, which we honour.</p>
+
+		<h2>6. Third-party processors</h2>
+		<ul>
+			<li><b>Paddle.com</b> — payments, invoicing and tax (their <a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener">privacy policy</a>)</li>
+			<li><b>Google Firebase / Firestore</b> — authentication and settings sync</li>
+			<li><b>Google Gemini API</b> — on-demand AI suggestions</li>
+			<li><b>Google Analytics</b> — website traffic statistics (website only, not the extension)</li>
+		</ul>
+
+		<h2>7. Security</h2>
+		<p>Data in transit is encrypted (HTTPS). Sync data is protected by Firebase security rules so only your authenticated account can read it. No method of storage is 100% secure, but we minimise what we collect in the first place — the most sensitive data (your analytics) never leaves your browser.</p>
+
+		<h2>8. Children</h2>
+		<p>The Service is not directed at children under 13 (or the minimum age in your country) and we do not knowingly collect their data.</p>
+
+		<h2>9. Changes</h2>
+		<p>We will post any changes to this policy on this page with an updated date, and note material changes on the extension's dashboard.</p>
+
+		<div class="legal-row">
+			<a href="/toolkit/">Itch Toolkit</a> ·
+			<a href="/toolkit/pricing/">Pricing</a> ·
+			<a href="/toolkit/terms/">Terms of Service</a> ·
+			<a href="/toolkit/privacy/">Privacy Policy</a> ·
+			<a href="/toolkit/refunds/">Refund Policy</a> ·
+			<a href="/">rehandev.xyz</a>
+		</div>
+	</div>
+</body>
+</html>

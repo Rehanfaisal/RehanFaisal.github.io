@@ -40,7 +40,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			overflow: hidden;
+			overflow-x: hidden;
+			overflow-y: auto; /* short screens can scroll instead of clipping */
 			padding: 24px;
 		}
 		::selection { background: var(--accent); color: #06251f; }
@@ -210,6 +211,16 @@
 		.btn.ghost { border: 1px solid rgba(148, 163, 184, .35); color: var(--text); }
 		.btn.ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
+		.legal-row {
+			margin-top: 22px;
+			padding-top: 14px;
+			border-top: 1px solid rgba(148, 163, 184, .15);
+			font-size: .72rem;
+			color: var(--muted);
+		}
+		.legal-row a { color: var(--muted); }
+		.legal-row a:hover { color: var(--accent); }
+
 		@media (prefers-reduced-motion: reduce) {
 			*, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 		}
@@ -239,8 +250,15 @@
 			</p>
 			<div class="links">
 				<a class="btn primary" href="https://twitter.com/RehanFaisall" target="_blank" rel="noopener">Follow for the launch →</a>
+				<a class="btn ghost" href="/toolkit/pricing/">Pricing</a>
 				<a class="btn ghost" href="https://rehandev.itch.io/" target="_blank" rel="noopener">My itch.io</a>
 				<a class="btn ghost" href="/">← Back to base</a>
+			</div>
+			<div class="legal-row">
+				<a href="/toolkit/pricing/">Pricing</a> ·
+				<a href="/toolkit/terms/">Terms of Service</a> ·
+				<a href="/toolkit/privacy/">Privacy Policy</a> ·
+				<a href="/toolkit/refunds/">Refund Policy</a>
 			</div>
 		</div>
 	</div>
@@ -332,15 +350,19 @@
 		}
 		if (reduceMotion) grow();
 
-		/* custom cursor */
+		/* custom cursor
+		   NOTE: this var was previously ALSO named `cur`, colliding with the
+		   terminal-typing `cur` above (var hoisting = same variable). The typing
+		   timeouts then wrote terminal text INTO the cursor dot — the glitch.
+		   Renamed to curDot so both features own their element. */
 		if (window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
-			var cur = document.getElementById('cur');
+			var curDot = document.getElementById('cur');
 			var ring = document.getElementById('curRing');
 			var cx = -100, cy = -100, rx = -100, ry = -100;
 			document.body.classList.add('cursor-on');
 			document.addEventListener('mousemove', function (e) {
 				cx = e.clientX; cy = e.clientY;
-				cur.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
+				curDot.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
 			});
 			(function follow() {
 				rx += (cx - rx) * .18;
@@ -352,10 +374,10 @@
 				ring.classList.toggle('hov', !!e.target.closest('a, button'));
 			});
 			document.documentElement.addEventListener('mouseleave', function () {
-				cur.style.opacity = ring.style.opacity = '0';
+				curDot.style.opacity = ring.style.opacity = '0';
 			});
 			document.documentElement.addEventListener('mouseenter', function () {
-				cur.style.opacity = ring.style.opacity = '';
+				curDot.style.opacity = ring.style.opacity = '';
 			});
 		}
 	})();
